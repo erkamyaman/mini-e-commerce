@@ -4,3 +4,23 @@
 body {
     font-family: 'Inter', sans-serif;
 }
+
+
+:root {
+    --p-inputtext-focus-border-color: #FF9900 !important;
+
+    --p-button-primary-background: #FF9900 !important;
+    --p-button-primary-hover-background: #e88a00 !important;
+    --p-button-primary-active-background: #cc7a00 !important;
+
+    --p-button-primary-border-color: #FF9900 !important;
+    --p-button-primary-hover-border-color: #e88a00 !important;
+    --p-button-primary-active-border-color: #cc7a00 !important;
+
+    --p-button-primary-color: #ffffff !important;
+    --p-button-primary-hover-color: #ffffff !important;
+    --p-button-primary-active-color: #ffffff !important;
+
+    --p-button-primary-focus-ring-color: #ffcc80 !important;
+    --p-button-primary-focus-ring-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.4) !important;
+}

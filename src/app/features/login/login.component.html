@@ -1,1 +1,11 @@
-<p>login works!</p>
+<div class="login-wrapper">
+  <h1>Welcome to Emazon</h1>
+  <div class="form-wrapper">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm">
+      <input pInputText placeholder="Username" type="text" name="username" id="username" />
+      <input pInputText placeholder="Password" type="password" name="password" id="password" />
+      <p-button label="Login" />
+    </form>
+  </div>
+</div>
