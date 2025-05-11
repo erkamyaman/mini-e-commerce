@@ -5,9 +5,9 @@
     </div>
 
     <div class="end-wrapper">
-      <span>Products</span>
-      <span>Orders</span>
-      <span>Sales</span>
+      <a routerLink="/products" [ngClass]="activePage === 'products' ? 'active-tab' : ''">Products</a>
+      <a routerLink="/orders" [ngClass]="activePage === 'orders' ? 'active-tab' : ''">Orders</a>
+      <a routerLink="/sales" [ngClass]="activePage === 'sales' ? 'active-tab' : ''">Sales</a>
     </div>
   </div>
 </div>

@@ -21,6 +21,26 @@ img {
     padding: 0 !important;
 }
 
+a {
+    text-decoration: none;
+    color: #242F40;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.active-tab {
+    color: #FF9900;
+}
+
+.active-tab:hover {
+    text-decoration: none;
+    cursor: default;
+}
+
+
+
 .end-wrapper {
     display: flex;
     gap: 1rem;

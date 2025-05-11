@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { NavbarComponent } from "./layout/navbar/navbar.component";
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,26 @@ import { NavbarComponent } from "./layout/navbar/navbar.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'mini-Commerce';
+  currentPage: string = '';
+  currentRoute: string = '';
+
+  constructor(private router: Router, private aRoute: ActivatedRoute, public appService: AppService
+  ) {
+  }
+  ngOnInit() {
+    this.appService.currentRoute$.subscribe(route => {
+      this.currentRoute = route;
+    });
+
+    console.log(this.aRoute.snapshot.url);
+
+
+    this.aRoute.url.subscribe((res) => {
+      console.log(res)
+      this.currentPage = res[0].path.slice(1)
+      console.log(this.currentPage)
+    })
+  }
 }
