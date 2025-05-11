@@ -1,0 +1,8 @@
+{
+  "printWidth": 8000,
+  "trailingComma": "none",
+  "bracketSameLine": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "singleQuote": true,
+  "braceStyle": "stroustrup"
+}
