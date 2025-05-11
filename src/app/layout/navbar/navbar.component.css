@@ -26,9 +26,6 @@ a {
     color: #242F40;
 }
 
-a:hover {
-    text-decoration: underline;
-}
 
 .active-tab {
     color: #FF9900;

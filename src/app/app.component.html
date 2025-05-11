@@ -1,6 +1,17 @@
-@if (appService._currentRouteSubject.value !== 'login' && appService._currentRouteSubject.value !== 'signup') {
+<ng-container *ngIf="appService.currentRoute$ | async as route">
+  <app-navbar *ngIf="route !== 'login' && route !== 'signup' && route !== 'not-found'"></app-navbar>
+</ng-container>
+
+<!-- @if (appService._currentRouteSubject.value !== 'login' && appService._currentRouteSubject.value !== 'signup') {
 <app-navbar></app-navbar>
-}
+} -->
+
+<!-- @if ((appService.currentRoute$ | async) as route) {
+  @if (route !== 'login' && route !== 'signup' && route !== 'not-found') {
+    <app-navbar></app-navbar>
+  }
+} -->
+
 <div class="wrapper">
   <router-outlet></router-outlet>
 </div>
