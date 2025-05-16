@@ -2,10 +2,20 @@
   <h1>Welcome to Emazon</h1>
   <div class="form-wrapper">
     <h2>Login</h2>
-    <form [formGroup]="loginForm">
-      <input pInputText placeholder="Username" type="text" name="username" id="username" />
-      <input pInputText placeholder="Password" type="password" name="password" id="password" />
-      <p-button label="Login" />
+    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+      <input pInputText placeholder="Username" type="text" formControlName="username" name="username" id="username" />
+      @if (invalidFieldChecker('username')) {
+      <div style="color: red">
+        {{ invalidFieldMessage('username') }}
+      </div>
+      }
+      <input pInputText placeholder="Password" type="password" formControlName="password" name="password" id="password" />
+      @if (invalidFieldChecker('password')) {
+      <div style="color: red">
+        {{ invalidFieldMessage('password') }}
+      </div>
+      }
+      <p-button type="submit" label="Login" />
     </form>
   </div>
 </div>

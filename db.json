@@ -1,0 +1,100 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "aragorn",
+      "password": "password1",
+      "role": "Salesman",
+      "name": "Aragorn",
+      "surname": "Elessar"
+    },
+    {
+      "id": 2,
+      "username": "legolas",
+      "password": "password2",
+      "role": "Salesman",
+      "name": "Legolas",
+      "surname": "Greenleaf"
+    },
+    {
+      "id": 3,
+      "username": "gandalf",
+      "password": "password3",
+      "role": "Manager",
+      "name": "Gandalf",
+      "surname": "the Grey"
+    },
+    {
+      "id": 4,
+      "username": "frodo",
+      "password": "password4",
+      "role": "Customer",
+      "name": "Frodo",
+      "surname": "Baggins"
+    },
+    {
+      "id": 5,
+      "username": "samwise",
+      "password": "password5",
+      "role": "Customer",
+      "name": "Samwise",
+      "surname": "Gamgee"
+    }
+  ],
+  "lotrProducts": [
+    { "id": "L001", "name": "The One Ring Replica", "img": "https://example.com/lotr/onering.jpg", "stock": 15, "price": 129.99 },
+    { "id": "L002", "name": "Gandalf’s Staff", "img": "https://example.com/lotr/gandalf-staff.jpg", "stock": 5, "price": 199.99 },
+    { "id": "L003", "name": "Arwen’s Evenstar Pendant", "img": "https://example.com/lotr/evenstar.jpg", "stock": 30, "price": 49.99 },
+    { "id": "L004", "name": "Sting Sword Replica", "img": "https://example.com/lotr/sting.jpg", "stock": 10, "price": 89.99 },
+    { "id": "L005", "name": "Middle-earth Map Poster", "img": "https://example.com/lotr/map.jpg", "stock": 40, "price": 14.99 },
+    { "id": "L006", "name": "Frodo Baggins Action Figure", "img": "https://example.com/lotr/frodo.jpg", "stock": 25, "price": 24.99 },
+    { "id": "L007", "name": "Legolas Bow Replica", "img": "https://example.com/lotr/legolas-bow.jpg", "stock": 8, "price": 139.99 },
+    { "id": "L008", "name": "Gollum Plush Toy", "img": "https://example.com/lotr/gollum.jpg", "stock": 20, "price": 19.99 },
+    { "id": "L009", "name": "Sauron Heat Mug", "img": "https://example.com/lotr/sauron-mug.jpg", "stock": 35, "price": 12.99 },
+    { "id": "L010", "name": "Rohan Banner", "img": "https://example.com/lotr/rohan-banner.jpg", "stock": 12, "price": 29.99 },
+
+    { "id": "L011", "name": "Gondor T-Shirt", "img": "https://example.com/lotr/gondor-shirt.jpg", "stock": 50, "price": 22.5 },
+    { "id": "L012", "name": "The Ringwraith Mask", "img": "https://example.com/lotr/ringwraith.jpg", "stock": 7, "price": 59.99 },
+    { "id": "L013", "name": "Middle-earth Puzzle 1000 pcs", "img": "https://example.com/lotr/puzzle.jpg", "stock": 18, "price": 27.95 },
+    { "id": "L014", "name": "Andúril Sword Replica", "img": "https://example.com/lotr/anduril.jpg", "stock": 4, "price": 249.99 },
+    { "id": "L015", "name": "Mordor Mug", "img": "https://example.com/lotr/mordor-mug.jpg", "stock": 45, "price": 10.99 },
+    { "id": "L016", "name": "Bilbo’s Journal Notebook", "img": "https://example.com/lotr/bilbo-notebook.jpg", "stock": 60, "price": 8.49 },
+    { "id": "L017", "name": "Shire Pint Glass", "img": "https://example.com/lotr/shire-glass.jpg", "stock": 33, "price": 13.0 },
+    { "id": "L018", "name": "Treebeard Figurine", "img": "https://example.com/lotr/treebeard.jpg", "stock": 9, "price": 44.99 },
+    { "id": "L019", "name": "LOTR Chess Set", "img": "https://example.com/lotr/chess.jpg", "stock": 6, "price": 74.95 },
+    { "id": "L020", "name": "Elven Cloak", "img": "https://example.com/lotr/cloak.jpg", "stock": 13, "price": 99.0 },
+
+    { "id": "L021", "name": "Saruman’s Staff", "img": "https://example.com/lotr/saruman.jpg", "stock": 3, "price": 189.0 },
+    { "id": "L022", "name": "Hobbiton Coaster Set", "img": "https://example.com/lotr/coasters.jpg", "stock": 24, "price": 16.75 },
+    { "id": "L023", "name": "Gimli Axe Replica", "img": "https://example.com/lotr/gimli-axe.jpg", "stock": 5, "price": 159.99 },
+    { "id": "L024", "name": "Elrond Figure", "img": "https://example.com/lotr/elrond.jpg", "stock": 22, "price": 29.99 },
+    { "id": "L025", "name": "Samwise Plush", "img": "https://example.com/lotr/samwise.jpg", "stock": 19, "price": 17.99 },
+    { "id": "L026", "name": "The Prancing Pony Mug", "img": "https://example.com/lotr/prancing-pony.jpg", "stock": 40, "price": 12.0 },
+    { "id": "L027", "name": "Mount Doom Diorama", "img": "https://example.com/lotr/doom.jpg", "stock": 2, "price": 299.0 },
+    { "id": "L028", "name": "Fellowship Wall Art", "img": "https://example.com/lotr/art.jpg", "stock": 16, "price": 39.99 },
+    { "id": "L029", "name": "Nazgûl Action Figure", "img": "https://example.com/lotr/nazgul.jpg", "stock": 14, "price": 27.5 },
+    { "id": "L030", "name": "Gondor Shield Replica", "img": "https://example.com/lotr/shield.jpg", "stock": 3, "price": 119.99 },
+
+    { "id": "L031", "name": "Isildur’s Helmet", "img": "https://example.com/lotr/isildur.jpg", "stock": 2, "price": 179.0 },
+    { "id": "L032", "name": "Rivendell Candle", "img": "https://example.com/lotr/rivendell.jpg", "stock": 25, "price": 18.0 },
+    { "id": "L033", "name": "Barad-dûr Night Light", "img": "https://example.com/lotr/baraddur.jpg", "stock": 7, "price": 36.0 },
+    { "id": "L034", "name": "Minas Tirith Miniature", "img": "https://example.com/lotr/minastirith.jpg", "stock": 11, "price": 64.99 },
+    { "id": "L035", "name": "Lembas Bread Tin", "img": "https://example.com/lotr/lembas.jpg", "stock": 32, "price": 9.99 },
+    { "id": "L036", "name": "Mordor Hoodie", "img": "https://example.com/lotr/mordor-hoodie.jpg", "stock": 28, "price": 45.0 },
+    { "id": "L037", "name": "Galadriel Mirror Bowl", "img": "https://example.com/lotr/galadriel.jpg", "stock": 6, "price": 89.0 },
+    { "id": "L038", "name": "Rohan Horse Pendant", "img": "https://example.com/lotr/rohan.jpg", "stock": 20, "price": 26.5 },
+    { "id": "L039", "name": "Fangorn Forest Poster", "img": "https://example.com/lotr/fangorn.jpg", "stock": 33, "price": 11.5 },
+    { "id": "L040", "name": "LOTR Trivia Game", "img": "https://example.com/lotr/trivia.jpg", "stock": 50, "price": 34.95 },
+
+    { "id": "L041", "name": "Shire Doormat", "img": "https://example.com/lotr/doormat.jpg", "stock": 38, "price": 21.99 },
+    { "id": "L042", "name": "Smeagol Dual Figure", "img": "https://example.com/lotr/smeagol.jpg", "stock": 10, "price": 49.99 },
+    { "id": "L043", "name": "Elven Leaf Pin", "img": "https://example.com/lotr/leaf-pin.jpg", "stock": 55, "price": 7.75 },
+    { "id": "L044", "name": "Orc Mask", "img": "https://example.com/lotr/orc-mask.jpg", "stock": 12, "price": 34.0 },
+    { "id": "L045", "name": "Mountains of Shadow Puzzle", "img": "https://example.com/lotr/mountains.jpg", "stock": 14, "price": 25.95 },
+    { "id": "L046", "name": "Mithril Notebook", "img": "https://example.com/lotr/mithril.jpg", "stock": 21, "price": 11.0 },
+    { "id": "L047", "name": "Shelob Toy Figure", "img": "https://example.com/lotr/shelob.jpg", "stock": 9, "price": 28.5 },
+    { "id": "L048", "name": "Helm’s Deep Diorama", "img": "https://example.com/lotr/helmsdeep.jpg", "stock": 3, "price": 135.99 },
+    { "id": "L049", "name": "Balin’s Tomb Candleholder", "img": "https://example.com/lotr/balin.jpg", "stock": 4, "price": 44.25 },
+    { "id": "L050", "name": "Elven Rune Journal", "img": "https://example.com/lotr/rune-journal.jpg", "stock": 18, "price": 14.99 }
+  ]
+}
