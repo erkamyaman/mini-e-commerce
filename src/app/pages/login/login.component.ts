@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -6,7 +5,7 @@ import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, InputTextModule, ButtonModule, NgIf],
+  imports: [ReactiveFormsModule, InputTextModule, ButtonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

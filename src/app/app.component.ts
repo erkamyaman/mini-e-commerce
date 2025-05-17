@@ -3,10 +3,12 @@ import { ActivatedRoute, Router, RouterOutlet, NavigationEnd } from '@angular/ro
 import { NavbarComponent } from "./layout/navbar/navbar.component";
 import { AppService } from './app.service';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { ProductService } from './pages/products/product.service';
+import { LayoutComponent } from "./layout/layout.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, AsyncPipe, NgIf],
+  imports: [RouterOutlet, NavbarComponent, AsyncPipe, NgIf, LayoutComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -15,7 +17,7 @@ export class AppComponent implements OnInit {
   currentPage: string = '';
   currentRoute: string = '';
 
-  constructor(private router: Router, private aRoute: ActivatedRoute, public appService: AppService
+  constructor(private router: Router, private aRoute: ActivatedRoute, public appService: AppService, public productService: ProductService
   ) {
   }
   ngOnInit() {
@@ -24,6 +26,7 @@ export class AppComponent implements OnInit {
     });
 
     console.log(this.aRoute.snapshot.url);
+    this.productService.getProducts().subscribe()
 
 
     this.aRoute.url.subscribe((res) => {

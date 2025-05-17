@@ -16,10 +16,11 @@ export class NavbarComponent implements OnInit {
   activePage: string = '';
 
   constructor(public appService: AppService) { }
-
+  // 
   ngOnInit() {
     this.appService.currentRoute$.subscribe(route => {
       this.activePage = route;
+      // router link active directive check
     });
   }
 

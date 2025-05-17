@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { ProductService } from './pages/products/product.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppService {
+export class AppService implements OnInit {
+
+
   _currentRouteSubject = new BehaviorSubject<string>('')
   currentRoute$ = this._currentRouteSubject.asObservable()
 
@@ -16,5 +19,7 @@ export class AppService {
         console.log(this._currentRouteSubject.value)
       }
     });
+  }
+  ngOnInit() {
   }
 }
