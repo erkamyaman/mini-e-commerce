@@ -3,12 +3,12 @@ import { Toolbar } from 'primeng/toolbar';
 import { AvatarModule } from 'primeng/avatar';
 import { SharedModule } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { AppService } from '../../app.service';
 @Component({
   selector: 'app-navbar',
-  imports: [Toolbar, AvatarModule, ButtonModule, RouterLink, NgClass,],
+  imports: [AvatarModule, ButtonModule, RouterLink, RouterLinkActive, NgClass,],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
