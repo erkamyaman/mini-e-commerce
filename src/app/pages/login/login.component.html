@@ -2,7 +2,7 @@
   <h1>Welcome to Emazon</h1>
   <div class="form-wrapper">
     <h2>Login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()" (keypress.enter)="submitLogin()">
       <input pInputText placeholder="Username" type="text" formControlName="username" name="username" id="username" />
       @if (invalidFieldChecker('username')) {
       <div style="color: red">

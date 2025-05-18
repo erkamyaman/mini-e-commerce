@@ -19,12 +19,13 @@ export const routes: Routes = [
 
     {
         path: '',
+        canActivate: [authGuard],
         component: LayoutComponent,
         children: [
             { path: '', redirectTo: 'products', pathMatch: 'full' },
-            { path: 'products', loadComponent: loadProducts, title: 'Products', canActivate: [authGuard] },
-            { path: 'orders', loadComponent: loadOrders, title: 'Orders', canActivate: [authGuard] },
-            { path: 'sales', loadComponent: loadSales, title: 'Sales', canActivate: [authGuard] }
+            { path: 'products', loadComponent: loadProducts, title: 'Products', data: { roles: ['customer'] } },
+            { path: 'orders', loadComponent: loadOrders, title: 'Orders', data: { roles: ['salesman', 'manager'] } },
+            { path: 'sales', loadComponent: loadSales, title: 'Sales', data: { roles: ['manager'] } }
         ]
     },
 

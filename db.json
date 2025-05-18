@@ -1,19 +1,35 @@
 {
   "users": [
     {
-      "id": 100,
+      "id": 101,
       "username": "1",
       "password": "1",
-      "role": "Salesman",
-      "name": "Aragorn",
-      "surname": "Elessar"
+      "role": "manager",
+      "name": "ErkamMNGR",
+      "surname": "Yaman"
+    },
+    {
+      "id": 102,
+      "username": "2",
+      "password": "2",
+      "role": "salesman",
+      "name": "ErkamSLM",
+      "surname": "Yaman"
+    },
+    {
+      "id": 103,
+      "username": "3",
+      "password": "3",
+      "role": "customer",
+      "name": "ErkamCst",
+      "surname": "Yaman"
     },
 
     {
       "id": 1,
       "username": "aragorn",
       "password": "password1",
-      "role": "Salesman",
+      "role": "salesman",
       "name": "Aragorn",
       "surname": "Elessar"
     },
@@ -21,7 +37,7 @@
       "id": 2,
       "username": "legolas",
       "password": "password2",
-      "role": "Salesman",
+      "role": "salesman",
       "name": "Legolas",
       "surname": "Greenleaf"
     },
@@ -29,7 +45,7 @@
       "id": 3,
       "username": "gandalf",
       "password": "password3",
-      "role": "Manager",
+      "role": "manager",
       "name": "Gandalf",
       "surname": "the Grey"
     },
@@ -37,7 +53,7 @@
       "id": 4,
       "username": "frodo",
       "password": "password4",
-      "role": "Customer",
+      "role": "customer",
       "name": "Frodo",
       "surname": "Baggins"
     },
@@ -45,7 +61,7 @@
       "id": 5,
       "username": "samwise",
       "password": "password5",
-      "role": "Customer",
+      "role": "customer",
       "name": "Samwise",
       "surname": "Gamgee"
     }

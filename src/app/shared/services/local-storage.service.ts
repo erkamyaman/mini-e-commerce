@@ -10,7 +10,6 @@ export class LocalStorageService {
   }
 
   get(key: string) {
-    console.log(localStorage.getItem(key))
     return localStorage.getItem(key)
   }
 
