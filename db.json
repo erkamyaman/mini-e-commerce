@@ -1,6 +1,15 @@
 {
   "users": [
     {
+      "id": 100,
+      "username": "1",
+      "password": "1",
+      "role": "Salesman",
+      "name": "Aragorn",
+      "surname": "Elessar"
+    },
+
+    {
       "id": 1,
       "username": "aragorn",
       "password": "password1",

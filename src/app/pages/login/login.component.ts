@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { AuthService } from '../../core/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +15,9 @@ export class LoginComponent {
   loginForm!: FormGroup;
   submitted = false;
 
+  authService = inject(AuthService);
+  router = inject(Router);
+
   constructor(public fb: FormBuilder) {
     this.loginForm = this.fb.group({
       username: new FormControl('', Validators.required),
@@ -22,7 +27,14 @@ export class LoginComponent {
 
   submitLogin() {
     this.submitted = true
-    console.log('login')
+    this.authService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe({
+      next: () => {
+        console.log('Login successful');
+      },
+      error: err => {
+        console.error('Login failed:', err.message);
+      }
+    });
   }
 
   invalidFieldChecker(fieldName: string) {
