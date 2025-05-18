@@ -4,10 +4,6 @@
       <img src="assets/logo.png" alt="logo" />
     </div>
 
-    <!-- <div class="mid-wrapper">
-      <span>{{ currentUser?.role?.toLocaleUpperCase() }}</span>
-    </div> -->
-
     <div class="end-wrapper">
       <a routerLink="/products" routerLinkActive="active-tab">Products</a>
       <a routerLink="/orders" routerLinkActive="active-tab">Orders</a>
@@ -18,7 +14,6 @@
           <i class="pi pi-caret-down"></i>
         </span>
 
-        <!-- Menu stays within the same wrapper -->
         <p-menu #userMenu [popup]="true" [style]="{ 'min-width': '160px', 'max-width': '220px' }" [model]="items"></p-menu>
       </div>
     </div>
