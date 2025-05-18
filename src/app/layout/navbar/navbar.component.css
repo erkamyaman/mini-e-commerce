@@ -46,3 +46,17 @@ a {
     align-items: center;
     margin-right: 2rem;
 }
+
+.user-dropdown-trigger {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0.3rem 0.4rem;
+    border-radius: 20px;
+    background-color: transparent;
+    color: #242F40;
+    transition: background-color 0.2s ease;
+}
+
+.user-dropdown-trigger:hover {
+    background-color: #f3f3f3;
+}

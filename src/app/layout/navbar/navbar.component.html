@@ -4,11 +4,23 @@
       <img src="assets/logo.png" alt="logo" />
     </div>
 
+    <!-- <div class="mid-wrapper">
+      <span>{{ currentUser?.role?.toLocaleUpperCase() }}</span>
+    </div> -->
+
     <div class="end-wrapper">
       <a routerLink="/products" routerLinkActive="active-tab">Products</a>
       <a routerLink="/orders" routerLinkActive="active-tab">Orders</a>
       <a routerLink="/sales" routerLinkActive="active-tab">Sales</a>
-      <p-button (onClick)="logout()">Logout</p-button>
+      <div class="user-menu-wrapper" (mouseenter)="userMenu.show($event)" (mouseleave)="userMenu.hide()">
+        <span class="user-dropdown-trigger">
+          {{ currentUser?.name }}
+          <i class="pi pi-caret-down"></i>
+        </span>
+
+        <!-- Menu stays within the same wrapper -->
+        <p-menu #userMenu [popup]="true" [model]="items"></p-menu>
+      </div>
     </div>
   </div>
 </div>
