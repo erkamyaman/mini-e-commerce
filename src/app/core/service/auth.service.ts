@@ -83,6 +83,10 @@ export class AuthService {
     return this.currentUserSubject.value
   }
 
+  getCurrentUserRole() {
+    return this.currentUserSubject.value?.role
+  }
+
   setCurrentUser() {
     const userJson = this.localStorageService.get('user');
     if (userJson) {

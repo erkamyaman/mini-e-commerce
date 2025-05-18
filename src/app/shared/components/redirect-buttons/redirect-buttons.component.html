@@ -1,0 +1,9 @@
+<div class="tabs">
+  @if(userRole === 'manager' || userRole === 'salesman'){
+  <p-button size="large" routerLink="/orders">Orders</p-button>
+  @if(userRole === 'manager'){
+  <p-button size="large" routerLink="/sales">Sales</p-button>
+  } } @else if(userRole === 'customer'){
+  <p-button size="large" routerLink="/products">Products</p-button>
+  }
+</div>
