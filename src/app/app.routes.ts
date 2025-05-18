@@ -4,6 +4,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LayoutComponent } from './layout/layout.component';
 import { authGuard } from './core/guard/auth.guard';
 import { loggedInGuard } from './core/guard/logged-in.guard';
+import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { roleGuard } from './core/guard/role.guard';
 
 const loadProducts = () =>
     import('./pages/products/products.component').then(m => m.ProductsComponent);
@@ -20,6 +22,7 @@ export const routes: Routes = [
     {
         path: '',
         canActivate: [authGuard],
+        canActivateChild: [roleGuard],
         component: LayoutComponent,
         children: [
             { path: '', redirectTo: 'products', pathMatch: 'full' },
@@ -29,8 +32,10 @@ export const routes: Routes = [
         ]
     },
 
+    { path: 'unauthorized', component: UnauthorizedComponent, title: 'Unauthorized' },
     { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
-    { path: 'not-found', component: NotFoundComponent, title: '404' }
+    { path: 'not-found', component: NotFoundComponent, title: '404' },
+
 ];
 
 

@@ -46,7 +46,9 @@ export class AuthService {
             this.localStorageService.set('user', JSON.stringify(user));
             this.currentUserSubject.next(user);
 
-            switch (this.currentUserSubject.value?.role) {
+            const userRole = this.currentUserSubject.value?.role
+
+            switch (userRole) {
               case 'manager':
                 this.router.navigate(['/sales']);
                 break;
@@ -71,8 +73,7 @@ export class AuthService {
   }
 
   logout() {
-    this.localStorageService.remove('token');
-    this.localStorageService.remove('user');
+    this.localStorageService.reset();
     this.isAuthenticated.next(false);
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
