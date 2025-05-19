@@ -4,9 +4,16 @@
       <img alt="Card" class="w-100 object-contain aspect-[5/4] p-4 pb-2" src="{{ data.img }}" />
     </ng-template>
     <ng-template #title>{{ data.name }}</ng-template>
-    <span>Stock: {{ data.stock }}</span>
-    <br />
-    <span>Price: ${{ data.price }}</span>
+    <div class="flex gap-4 text-gray-600">
+      <span>
+        Price:
+        <span class="font-bold text-black">${{ data.price }}</span>
+      </span>
+      <span>
+        Stock:
+        <span class="font-bold text-black">{{ data.stock }}</span>
+      </span>
+    </div>
     <ng-template #footer>
       <div class="flex gap-4 mt-1">
         <p-button icon="pi pi-shopping-bag" label="Order" class="w-full" styleClass="w-full" />
