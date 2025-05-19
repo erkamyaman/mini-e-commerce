@@ -1,1 +1,5 @@
-<div class="products-wrapper"></div>
+<div class="grid grid-cols-4 gap-4">
+  @for(product of products; track product.id){
+  <app-product-card [data]="product"></app-product-card>
+  }
+</div>
