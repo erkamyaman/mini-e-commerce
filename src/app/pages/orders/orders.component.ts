@@ -43,7 +43,7 @@ export class OrdersComponent implements OnInit {
     { field: 'productName', header: 'Product Name' },
     { field: 'status', header: 'Product Status' },
     { field: 'shop', header: 'Shop' },
-    { field: 'addedBy.name', header: 'Customer Full Name' },
+    { field: 'addedBy.name', header: 'Customer Name' },
     { field: 'date', header: 'Order Date' },
     { field: 'quantity', header: 'Order Amount' },
     { field: 'totalAmount', header: 'Total Amount' },

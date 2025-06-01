@@ -382,6 +382,47 @@
       "price": 135.99
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "id": "5a98",
+      "orderId": "ORD-5RDWYLXZE",
+      "productId": "L001",
+      "productName": "The One Ring Replica",
+      "quantity": 3,
+      "addedBy": {
+        "id": 103,
+        "username": "3",
+        "password": "3",
+        "role": "customer",
+        "name": "ErkamCst",
+        "surname": "Yaman"
+      },
+      "date": "2025-06-01T11:35:50.720Z",
+      "address": "2",
+      "status": "waiting",
+      "totalAmount": 389.97,
+      "shop": ""
+    },
+    {
+      "id": "0d32",
+      "orderId": "ORD-TWZF6ZSVW",
+      "productId": "L002",
+      "productName": "Gandalf’s Staff",
+      "quantity": 2,
+      "addedBy": {
+        "id": 103,
+        "username": "3",
+        "password": "3",
+        "role": "customer",
+        "name": "ErkamCst",
+        "surname": "Yaman"
+      },
+      "date": "2025-06-01T11:35:54.959Z",
+      "address": "23",
+      "status": "waiting",
+      "totalAmount": 399.98,
+      "shop": ""
+    }
+  ],
   "sales": []
 }
