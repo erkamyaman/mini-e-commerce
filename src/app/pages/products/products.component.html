@@ -4,12 +4,12 @@
   }
 </div>
 
-<p-dialog header="Add" [(visible)]="displayProductDialog" [modal]="true" (onHide)="productService.productAddModal.next(false)" [style]="{ width: '650px' }" class="edit-dialog">
+<p-dialog header="Add" [(visible)]="displayProductDialog" [modal]="true" (onHide)="closeDialog()" [style]="{ width: '650px' }" class="edit-dialog">
   <div class="flex gap-6 p-4 items-start">
     <form [formGroup]="productAddForm" (ngSubmit)="addProduct()" (keypress.enter)="addProduct()" class="flex flex-col gap-4 w-2/5">
       <div class="flex flex-col gap-1">
         <label for="quantity" class="text-sm font-semibold text-gray-700">Quantity</label>
-        <input pInputText id="quantity" type="number" placeholder="Enter quantity" formControlName="quantity" class="p-inputtext w-full" />
+        <input pInputText id="quantity" type="number" placeholder="Enter quantity" formControlName="quantity" />
       </div>
       <p-button type="submit" label="Order" class="w-full" />
     </form>

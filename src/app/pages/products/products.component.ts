@@ -5,10 +5,11 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-products',
-  imports: [ReactiveFormsModule, ButtonModule, ProductCardComponent, DialogModule],
+  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, ProductCardComponent, DialogModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -34,11 +35,11 @@ export class ProductsComponent implements OnInit {
   }
 
   closeDialog() {
+    this.productAddForm.reset();
     this.productService.productAddModal.next(false);
   }
 
   addProduct() {
-    this.productAddForm.reset();
     this.closeDialog();
   }
 }
