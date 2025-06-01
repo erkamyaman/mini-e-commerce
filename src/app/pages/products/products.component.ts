@@ -6,6 +6,7 @@ import { DialogModule } from 'primeng/dialog';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-products',
@@ -15,6 +16,7 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export class ProductsComponent implements OnInit {
   productService = inject(ProductService);
+  messageService = inject(MessageService);
   displayProductDialog = false;
   products: Product[] = [];
   productAddForm!: FormGroup;
@@ -47,7 +49,11 @@ export class ProductsComponent implements OnInit {
   addProduct() {
     this.productService.addProductToSales(this.chosenProduct, this.productAddForm.getRawValue().quantity).subscribe({
       next: () => {
-        console.log('Product added successfully.');
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Product added successfully'
+        });
         this.closeDialog();
       },
       error: (err) => {
