@@ -38,6 +38,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addProduct() {
-    //
+    this.productAddForm.reset();
+    this.closeDialog();
   }
 }

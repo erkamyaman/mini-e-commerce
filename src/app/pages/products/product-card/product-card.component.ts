@@ -11,7 +11,7 @@ import { ProductService } from '../product.service';
   styleUrl: './product-card.component.css'
 })
 export class ProductCardComponent {
-  @Input() data!: Product;
+  @Input() data: Product | null = null;
   @Input() isInDialog: boolean = false;
   productService = inject(ProductService);
 

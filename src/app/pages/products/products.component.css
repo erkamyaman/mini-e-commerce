@@ -1,0 +1,8 @@
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #FF9900;
+    border-radius: 40px;
+
+}

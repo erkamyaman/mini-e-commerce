@@ -1,17 +1,17 @@
 <div class="mb-4 p-8 flex items-center justify-center">
   <p-card [style]="{ width: '20rem', height: 'fit-content', overflow: 'hidden', border: '3px solid #FF9900 ' }">
     <ng-template #header>
-      <img alt="Card" class="w-100 object-contain aspect-[5/4] p-4 pb-2" src="{{ data.img }}" />
+      <img alt="Card" class="w-100 object-contain aspect-[5/4] p-4 pb-2" src="{{ data?.img }}" />
     </ng-template>
-    <ng-template #title>{{ data.name }}</ng-template>
+    <ng-template #title>{{ data?.name }}</ng-template>
     <div class="flex gap-4 text-gray-600">
       <span>
         Price:
-        <span class="font-bold text-black">${{ data.price }}</span>
+        <span class="font-bold text-black">${{ data?.price }}</span>
       </span>
       <span>
         Stock:
-        <span class="font-bold text-black">{{ data.stock }}</span>
+        <span class="font-bold text-black">{{ data?.stock }}</span>
       </span>
     </div>
     @if(!isInDialog){
