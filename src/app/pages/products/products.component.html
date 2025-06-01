@@ -9,7 +9,12 @@
     <form [formGroup]="productAddForm" (ngSubmit)="addProduct()" (keypress.enter)="addProduct()" class="flex flex-col gap-4 w-2/5">
       <div class="flex flex-col gap-1">
         <label for="quantity" class="text-sm font-semibold text-gray-700">Quantity</label>
-        <input pInputText id="quantity" [min]="0" [max]="maxStockAmount()" type="number" placeholder="Enter quantity" formControlName="quantity" />
+        <input pInputText id="quantity" [min]="0" [max]="maxStockAmount()" type="number" formControlName="quantity" />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="address" class="text-sm font-semibold text-gray-700">Address</label>
+        <input pInputText id="address" type="text" formControlName="address" />
       </div>
 
       @if(totalAmount()>0){

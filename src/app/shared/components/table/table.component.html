@@ -1,1 +1,29 @@
-<p>table works!</p>
+<div class="card">
+  <p-table #dt [value]="data" stripedRows showGridlines [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" [responsiveLayout]="'scroll'">
+    <ng-template pTemplate="header">
+      <tr>
+        @for(col of cols;track col.field){
+        <td>
+          {{ col.header }}
+        </td>
+        }
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        @for(col of cols;track col.field){
+
+        <td>
+          @if(col.field === 'storeActions'){
+          <p-splitButton label="Accept" severity="success" (onClick)="acceptOrder(row)" icon="pi pi-check" appendTo="body" [model]="getActions(row)" class="p-button-sm"></p-splitButton>
+          }@else if (col.field === 'shop') {
+          <p-dropdown [options]="shopOptions" [(ngModel)]="row.selectedShop" optionLabel="name" placeholder="Select Shop" appendTo="body" class="w-full" (onChange)="onShopChange(row)"></p-dropdown>
+          } @else { {{ getFieldValue(row, col.field) }} }
+        </td>
+
+        }
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

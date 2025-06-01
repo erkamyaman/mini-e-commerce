@@ -5,6 +5,7 @@ import { ProductService } from './pages/products/product.service';
 import { AuthService } from './core/service/auth.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { OrdersService } from './pages/orders/orders.service';
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, ConfirmDialogModule, ToastModule],
@@ -14,10 +15,11 @@ import { ToastModule } from 'primeng/toast';
 export class AppComponent implements OnInit {
   title = 'mini-Commerce';
 
-  constructor(public appService: AppService, public productService: ProductService, public authService: AuthService) {}
+  constructor(public appService: AppService, public productService: ProductService, public ordersService: OrdersService, public authService: AuthService) { }
 
   ngOnInit() {
     this.productService.getProducts().subscribe();
+    this.ordersService.getOrders().subscribe()
     this.authService.setCurrentUser();
   }
 }

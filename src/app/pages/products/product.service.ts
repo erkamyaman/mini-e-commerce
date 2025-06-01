@@ -3,6 +3,7 @@ import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'r
 import { Product } from '../../core/types/product.model';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../core/service/auth.service';
+import { Status } from '../../core/types/status.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class ProductService {
     );
   }
 
-  addProductToSales(product: Product, quantity: number): Observable<any> {
+  addProductToSales(product: Product, quantity: number, address: string): Observable<any> {
     const currentUser = this.authService.getCurrentUser();
     const randomId = 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
 
@@ -40,7 +41,11 @@ export class ProductService {
       productName: product.name,
       quantity: quantity,
       addedBy: currentUser,
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      address: address,
+      status: Status.Waiting,
+      totalAmount: quantity * product.price,
+      shop: ''
     };
 
     return this.httpService.post('http://localhost:3000/orders', orderPayload).pipe(

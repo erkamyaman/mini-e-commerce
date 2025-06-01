@@ -11,9 +11,10 @@ import { ProductService } from '../product.service';
   styleUrl: './product-card.component.css'
 })
 export class ProductCardComponent {
+  productService = inject(ProductService);
+
   @Input() data: Product | null = null;
   @Input() isInDialog: boolean = false;
-  productService = inject(ProductService);
 
   openDialog() {
     this.productService.productAddModal.next(true);

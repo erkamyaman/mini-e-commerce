@@ -24,7 +24,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(public fb: FormBuilder) {
     this.productAddForm = this.fb.group({
-      quantity: new FormControl(<number | null>null, [Validators.required, Validators.min(1)])
+      quantity: new FormControl(<number | null>null, [Validators.required, Validators.min(1)]),
+      address: new FormControl(<string | null>null, [Validators.required])
     });
   }
   ngOnInit() {
@@ -47,7 +48,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addProduct() {
-    this.productService.addProductToSales(this.chosenProduct, this.productAddForm.getRawValue().quantity).subscribe({
+    this.productService.addProductToSales(this.chosenProduct, this.productAddForm.getRawValue().quantity, this.productAddForm.getRawValue().address).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully' });
         this.closeDialog();
