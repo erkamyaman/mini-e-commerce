@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(public fb: FormBuilder) {
     this.productAddForm = this.fb.group({
-      quantity: new FormControl(<number | null>null, Validators.required)
+      quantity: new FormControl(<number | null>null, [Validators.required, Validators.min(1)])
     });
   }
   ngOnInit() {
