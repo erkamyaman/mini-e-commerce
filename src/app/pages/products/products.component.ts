@@ -42,4 +42,20 @@ export class ProductsComponent implements OnInit {
   addProduct() {
     this.closeDialog();
   }
+
+  totalAmount() {
+    const chosenProduct = this.productService.chosenProduct.getValue();
+    if (chosenProduct) {
+      return chosenProduct.price * this.productAddForm.getRawValue().quantity;
+    }
+    return 0;
+  }
+
+  maxStockAmount() {
+    const chosenProduct = this.productService.chosenProduct.getValue();
+    if (chosenProduct) {
+      return chosenProduct.stock;
+    }
+    return 0;
+  }
 }
