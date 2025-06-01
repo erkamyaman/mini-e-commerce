@@ -49,15 +49,11 @@ export class ProductsComponent implements OnInit {
   addProduct() {
     this.productService.addProductToSales(this.chosenProduct, this.productAddForm.getRawValue().quantity).subscribe({
       next: () => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Product added successfully'
-        });
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully' });
         this.closeDialog();
       },
       error: (err) => {
-        console.error('Failed to add product:', err);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to add product' });
       }
     });
   }
