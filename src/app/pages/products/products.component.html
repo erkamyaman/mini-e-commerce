@@ -23,7 +23,7 @@
       </div>
       }
 
-      <p-button type="submit" label="Order" [disabled]="productAddForm.invalid || chosenProduct.stock < productAddForm.getRawValue().quantity" class="w-full" />
+      <button class="w-full p-2 bg-amber-600 hover:bg-green-500 rounded-md text-white disabled:text-gray-800 disabled:bg-gray-400" type="submit" label="Order" [disabled]="productAddForm.invalid || chosenProduct.stock < productAddForm.getRawValue().quantity">Order</button>
     </form>
 
     <div class="w-3/5">

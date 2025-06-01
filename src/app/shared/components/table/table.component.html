@@ -1,29 +1,25 @@
 <div class="table-wrapper">
-  <p-table #dt [value]="data" stripedRows showGridlines styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" [responsiveLayout]="'scroll'">
-    <ng-template pTemplate="caption"></ng-template>
-
-    <ng-template pTemplate="header">
+  <p-table #dt [value]="data" showGridlines styleClass="p-datatable-gridlines" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" [responsiveLayout]="'scroll'">
+    <ng-template #header>
       <tr>
         @for(col of cols;track col.field){
-        <td>
+        <th>
           {{ col.header }}
-        </td>
+        </th>
         }
       </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-row>
+    <ng-template #body let-row>
       <tr>
         @for(col of cols;track col.field){
-
         <td>
           @if(col.field === 'storeActions'){
           <p-splitButton label="Accept" severity="success" (onClick)="acceptOrder(row)" icon="pi pi-check" appendTo="body" [model]="getActions(row)" class="p-button-sm"></p-splitButton>
           }@else if (col.field === 'shop') {
-          <p-dropdown [options]="shopOptions" [(ngModel)]="row.selectedShop" optionLabel="name" placeholder="Select Shop" appendTo="body" class="w-full" (onChange)="onShopChange(row)"></p-dropdown>
+          <p-dropdown [options]="[]" [(ngModel)]="row.selectedShop" optionLabel="name" placeholder="Select Shop" appendTo="body" class="w-full" (onChange)="onShopChange(row)"></p-dropdown>
           } @else { {{ getFieldValue(row, col.field) }} }
         </td>
-
         }
       </tr>
     </ng-template>

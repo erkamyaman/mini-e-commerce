@@ -422,7 +422,52 @@
       "status": "waiting",
       "totalAmount": 399.98,
       "shop": ""
+    },
+    {
+      "id": "f484",
+      "orderId": "ORD-445ZN85XD",
+      "productId": "L003",
+      "productName": "Arwen’s Evenstar Pendant",
+      "quantity": 23,
+      "addedBy": {
+        "id": 103,
+        "username": "3",
+        "password": "3",
+        "role": "customer",
+        "name": "ErkamCst",
+        "surname": "Yaman"
+      },
+      "date": "2025-06-01T13:07:30.102Z",
+      "address": "2",
+      "status": "waiting",
+      "totalAmount": 1149.77,
+      "shop": ""
+    },
+    {
+      "id": "680a",
+      "orderId": "ORD-JLH8RFL4W",
+      "productId": "L019",
+      "productName": "LOTR Chess Set",
+      "quantity": 3,
+      "addedBy": {
+        "id": 103,
+        "username": "3",
+        "password": "3",
+        "role": "customer",
+        "name": "ErkamCst",
+        "surname": "Yaman"
+      },
+      "date": "2025-06-01T13:23:19.105Z",
+      "address": "34",
+      "status": "waiting",
+      "totalAmount": 224.85000000000002,
+      "shop": ""
     }
   ],
-  "sales": []
+  "sales": [],
+  "shopOptions": [
+    { "name": "Mordor Shop", "code": "mordor" },
+    { "name": "Rivendell Boutique", "code": "rivendell" },
+    { "name": "Shire Market", "code": "shire" }
+  ]
 }

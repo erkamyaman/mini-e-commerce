@@ -49,7 +49,6 @@ export class OrdersComponent implements OnInit {
     { field: 'totalAmount', header: 'Total Amount' },
     { field: 'address', header: 'Address' },
     { field: 'storeActions', header: 'Store Actions' },
-
   ];
 
 

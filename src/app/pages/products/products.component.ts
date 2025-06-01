@@ -7,6 +7,8 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessageService } from 'primeng/api';
+import { OrderPayload } from './models/createOrder.dto';
+import { AuthService } from '../../core/service/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -17,6 +19,8 @@ import { MessageService } from 'primeng/api';
 export class ProductsComponent implements OnInit {
   productService = inject(ProductService);
   messageService = inject(MessageService);
+  authService = inject(AuthService)
+
   displayProductDialog = false;
   products: Product[] = [];
   productAddForm!: FormGroup;
@@ -48,7 +52,8 @@ export class ProductsComponent implements OnInit {
   }
 
   addProduct() {
-    this.productService.addProductToSales(this.chosenProduct, this.productAddForm.getRawValue().quantity, this.productAddForm.getRawValue().address).subscribe({
+    const orderPayload: OrderPayload = new OrderPayload(this.chosenProduct, this.productAddForm.getRawValue(), this.authService.getCurrentUser())
+    this.productService.addProductToSales(orderPayload).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully' });
         this.closeDialog();

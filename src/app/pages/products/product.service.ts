@@ -3,7 +3,7 @@ import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'r
 import { Product } from '../../core/types/product.model';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../core/service/auth.service';
-import { Status } from '../../core/types/status.enum';
+import { OrderPayload } from './models/createOrder.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -31,24 +31,8 @@ export class ProductService {
     );
   }
 
-  addProductToSales(product: Product, quantity: number, address: string): Observable<any> {
-    const currentUser = this.authService.getCurrentUser();
-    const randomId = 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-
-    const orderPayload = {
-      orderId: randomId,
-      productId: product.id,
-      productName: product.name,
-      quantity: quantity,
-      addedBy: currentUser,
-      date: new Date().toISOString(),
-      address: address,
-      status: Status.Waiting,
-      totalAmount: quantity * product.price,
-      shop: ''
-    };
-
-    return this.httpService.post('http://localhost:3000/orders', orderPayload).pipe(
+  addProductToSales(dto: OrderPayload): Observable<any> {
+    return this.httpService.post('http://localhost:3000/orders', dto).pipe(
       tap((res) => {
         console.log('Order saved to db.json:', res);
       }),

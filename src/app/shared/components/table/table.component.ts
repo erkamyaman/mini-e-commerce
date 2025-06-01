@@ -12,12 +12,6 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './table.component.css'
 })
 export class TableComponent implements OnInit {
-  shopOptions = [
-    { name: 'Mordor Shop', code: 'mordor' },
-    { name: 'Rivendell Boutique', code: 'rivendell' },
-    { name: 'Shire Market', code: 'shire' }
-  ];
-
   @Input() cols: Array<{ field: string; header: string }> = [];
   @Input() data: any[] = [];
 
