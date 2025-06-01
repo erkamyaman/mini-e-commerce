@@ -18,6 +18,7 @@ export class ProductsComponent implements OnInit {
   displayProductDialog = false;
   products: Product[] = [];
   productAddForm!: FormGroup;
+  chosenProduct!: Product;
 
   constructor(public fb: FormBuilder) {
     this.productAddForm = this.fb.group({
@@ -32,6 +33,10 @@ export class ProductsComponent implements OnInit {
     this.productService.modalObs$.subscribe(() => {
       this.displayProductDialog = this.productService.productAddModal.getValue();
     });
+
+    this.productService.chosenProObs$.subscribe(() => {
+      this.chosenProduct = this.productService.chosenProduct.getValue()!;
+    });
   }
 
   closeDialog() {
@@ -40,7 +45,15 @@ export class ProductsComponent implements OnInit {
   }
 
   addProduct() {
-    this.closeDialog();
+    this.productService.addProductToSales(this.chosenProduct, this.productAddForm.getRawValue().quantity).subscribe({
+      next: () => {
+        console.log('Product added successfully.');
+        this.closeDialog();
+      },
+      error: (err) => {
+        console.error('Failed to add product:', err);
+      }
+    });
   }
 
   totalAmount() {
