@@ -52,7 +52,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addProduct() {
-    const orderPayload: OrderPayload = new OrderPayload(this.chosenProduct, this.productAddForm.getRawValue(), this.authService.getCurrentUser())
+    const orderPayload: OrderPayload = new OrderPayload(this.chosenProduct, this.productAddForm.getRawValue(), this.authService.getCurrentUserId())
     this.productService.addProductToSales(orderPayload).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully' });

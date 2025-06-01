@@ -389,14 +389,7 @@
       "productId": "L001",
       "productName": "The One Ring Replica",
       "quantity": 3,
-      "addedBy": {
-        "id": 103,
-        "username": "3",
-        "password": "3",
-        "role": "customer",
-        "name": "ErkamCst",
-        "surname": "Yaman"
-      },
+      "userId": 103,
       "date": "2025-06-01T11:35:50.720Z",
       "address": "2",
       "status": "waiting",
@@ -409,14 +402,7 @@
       "productId": "L002",
       "productName": "Gandalf’s Staff",
       "quantity": 2,
-      "addedBy": {
-        "id": 103,
-        "username": "3",
-        "password": "3",
-        "role": "customer",
-        "name": "ErkamCst",
-        "surname": "Yaman"
-      },
+      "userId": 103,
       "date": "2025-06-01T11:35:54.959Z",
       "address": "23",
       "status": "waiting",
@@ -429,14 +415,7 @@
       "productId": "L003",
       "productName": "Arwen’s Evenstar Pendant",
       "quantity": 23,
-      "addedBy": {
-        "id": 103,
-        "username": "3",
-        "password": "3",
-        "role": "customer",
-        "name": "ErkamCst",
-        "surname": "Yaman"
-      },
+      "userId": 103,
       "date": "2025-06-01T13:07:30.102Z",
       "address": "2",
       "status": "waiting",
@@ -449,25 +428,39 @@
       "productId": "L019",
       "productName": "LOTR Chess Set",
       "quantity": 3,
-      "addedBy": {
-        "id": 103,
-        "username": "3",
-        "password": "3",
-        "role": "customer",
-        "name": "ErkamCst",
-        "surname": "Yaman"
-      },
+      "userId": 103,
       "date": "2025-06-01T13:23:19.105Z",
       "address": "34",
       "status": "waiting",
       "totalAmount": 224.85000000000002,
       "shop": ""
+    },
+    {
+      "id": "e070",
+      "orderId": "ORD-HEXCT4CA4",
+      "productId": "L002",
+      "productName": "Gandalf’s Staff",
+      "quantity": 4,
+      "userId": 103,
+      "date": "2025-06-01T19:00:00.588Z",
+      "address": "3",
+      "status": "waiting",
+      "totalAmount": 799.96,
+      "shop": ""
     }
   ],
-  "sales": [],
   "shopOptions": [
-    { "name": "Mordor Shop", "code": "mordor" },
-    { "name": "Rivendell Boutique", "code": "rivendell" },
-    { "name": "Shire Market", "code": "shire" }
+    {
+      "name": "Mordor Shop",
+      "code": "mordor"
+    },
+    {
+      "name": "Rivendell Boutique",
+      "code": "rivendell"
+    },
+    {
+      "name": "Shire Market",
+      "code": "shire"
+    }
   ]
 }

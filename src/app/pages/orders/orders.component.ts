@@ -9,14 +9,7 @@ export type Order = {
   productId: string;
   productName: string;
   quantity: number;
-  addedBy: {
-    id: number;
-    username: string;
-    password: string;
-    role: string;
-    name: string;
-    surname: string;
-  };
+  customerName: string;
   date: string;
   address: string;
   status: 'waiting' | 'accepted' | 'rejected';
@@ -43,7 +36,7 @@ export class OrdersComponent implements OnInit {
     { field: 'productName', header: 'Product Name' },
     { field: 'status', header: 'Product Status' },
     { field: 'shop', header: 'Shop' },
-    { field: 'addedBy.name', header: 'Customer Name' },
+    { field: 'customerName', header: 'Customer Name' },
     { field: 'date', header: 'Order Date' },
     { field: 'quantity', header: 'Order Amount' },
     { field: 'totalAmount', header: 'Total Amount' },

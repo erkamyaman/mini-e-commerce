@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { MenuItem } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../../core/service/user.service';
 
 @Component({
   selector: 'app-table',
@@ -12,13 +13,18 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './table.component.css'
 })
 export class TableComponent implements OnInit {
+  public userService = inject(UserService)
+
   @Input() cols: Array<{ field: string; header: string }> = [];
   @Input() data: any[] = [];
 
 
   ngOnInit(): void {
-    console.log(this.cols)
-    console.log(this.data)
+    this.data.forEach(element => {
+      this.userService.getUserById(element.userId).subscribe(user => {
+        element.customerName = user.name;
+      });
+    });
   }
 
   getFieldValue(row: any, field: string): any {

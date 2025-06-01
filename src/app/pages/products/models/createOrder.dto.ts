@@ -6,20 +6,20 @@ export class OrderPayload {
     productId!: string;
     productName!: string;
     quantity!: number;
-    addedBy: any;
-    date!: string;
+    userId!: number;
+    date!: Date;
     address!: string;
     status!: Status;
     totalAmount!: number;
     shop!: string;
 
-    constructor(product: Product, form: any, user: any) {
+    constructor(product: Product, form: any, userId: number) {
         this.orderId = 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
         this.productId = product.id;
         this.productName = product.name;
         this.quantity = form.quantity;
-        this.addedBy = user;
-        this.date = new Date().toISOString();
+        this.userId = userId;
+        this.date = new Date();
         this.address = form.address;
         this.status = Status.Waiting;
         this.totalAmount = form.quantity * product.price;

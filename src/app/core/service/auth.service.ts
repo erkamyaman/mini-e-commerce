@@ -3,15 +3,9 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
 import { LocalStorageService } from '../../shared/services/local-storage.service';
 import { Router } from '@angular/router';
+import { User } from '../types/user.model';
 
-export interface User {
-  id: number;
-  username: string;
-  password: string;
-  role: string;
-  name: string;
-  surname: string;
-}
+
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +23,7 @@ export class AuthService {
 
   private token = '123';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
     return this.http.get<any[]>(`http://localhost:3000/users`).pipe(
@@ -82,6 +76,10 @@ export class AuthService {
 
   getCurrentUserRole() {
     return this.currentUserSubject.value?.role;
+  }
+
+  getCurrentUserId(): number {
+    return this.currentUserSubject.value ? this.currentUserSubject.value.id ?? 0 : 0;
   }
 
   setCurrentUser() {
