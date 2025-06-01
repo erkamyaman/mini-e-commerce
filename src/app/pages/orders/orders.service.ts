@@ -22,17 +22,40 @@ export class OrdersService {
     );
   }
 
-  addShopToOrderById(orderId: string, shopId: number): Observable<Order> {
+  addShopToOrderById(id: string, shopId: number): Observable<Order> {
     return this.httpService
-      .patch<Order>(`http://localhost:3000/orders/${orderId}`, { shopId })
+      .patch<Order>(`http://localhost:3000/orders/${id}`, { shopId })
       .pipe(
         tap((updatedOrder) => {
-          console.log(updatedOrder)
           const currentOrders = this.orders.value;
           if (!currentOrders) return;
 
           const updatedOrders = currentOrders.map(order =>
-            order.orderId === updatedOrder.orderId
+            order.id === updatedOrder.id
+              ? updatedOrder
+              : order
+          );
+
+          this.orders.next(updatedOrders);
+        }),
+        catchError((err: any) => {
+          console.error('Error updating order', err);
+          return throwError(() => new Error(err));
+        })
+      );
+  }
+
+  changeOrderStatus(id: string, status: string): Observable<Order> {
+    console.log(id)
+    return this.httpService
+      .patch<Order>(`http://localhost:3000/orders/${id}`, { status })
+      .pipe(
+        tap((updatedOrder) => {
+          const currentOrders = this.orders.value;
+          if (!currentOrders) return;
+
+          const updatedOrders = currentOrders.map(order =>
+            order.id === updatedOrder.id
               ? updatedOrder
               : order
           );

@@ -2,17 +2,17 @@ import { Component, inject, OnInit } from '@angular/core';
 import { TableComponent } from "../../shared/components/table/table.component";
 import { OrdersService } from './orders.service';
 import { ButtonModule } from 'primeng/button';
+import { Status } from '../../core/types/status.enum';
 
 export type Order = {
   id: string;
-  orderId: string;
   productId: string;
   productName: string;
   quantity: number;
   customerName: string;
   date: string;
   address: string;
-  status: 'waiting' | 'accepted' | 'rejected';
+  status: Status;
   shopId: number
 };
 

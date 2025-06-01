@@ -23,7 +23,7 @@ export class TableComponent implements OnInit {
 
   @Input() cols: Array<{ field: string; header: string }> = [];
   @Input() data: any[] = [];
-
+  current: any;
   shops: any[] = []
 
   ngOnInit(): void {
@@ -57,26 +57,31 @@ export class TableComponent implements OnInit {
     console.log('Delete clicked for:', row);
   }
 
+  changeOrderStatus(row: any, status: string) {
+    this.orderService.changeOrderStatus(row.id, status).subscribe(() => {
+      console.log(`Order ${row.id} status changed to ${status}`);
+    });
+  }
+
 
 
   confirmOperation(operationType: string, row: any) {
-    let operationFunction: () => void;
+    // let operationFunction: () => void;
 
-    switch (operationType) {
-      case 'accept':
-        operationFunction = () => this.acceptOrder(row);
-        break;
-      case 'reject':
-        operationFunction = () => this.rejectOrder(row);
-        break;
-      case 'delete':
-        operationFunction = () => this.deleteOrder(row);
-        break;
-      default:
-        operationFunction = () => { };
-        break;
-    }
-
+    // switch (operationType) {
+    //   case 'accept':
+    //     operationFunction = () => this.acceptOrder(row);
+    //     break;
+    //   case 'reject':
+    //     operationFunction = () => this.rejectOrder(row);
+    //     break;
+    //   case 'delete':
+    //     operationFunction = () => this.deleteOrder(row);
+    //     break;
+    //   default:
+    //     operationFunction = () => { };
+    //     break;
+    // }
     this.confirmationService.confirm({
       message: `Are you sure you want to ${operationType} this order?`,
       header: `Confirm ${operationType.charAt(0).toUpperCase() + operationType.slice(1)}`,
@@ -86,7 +91,9 @@ export class TableComponent implements OnInit {
       acceptButtonStyleClass: operationType !== 'accept' ? 'p-button-danger' : 'p-button-success',
       rejectButtonStyleClass: 'p-button-secondary',
       accept: () => {
-        operationFunction();
+        this.orderService.changeOrderStatus(row.id, operationType).subscribe(() => {
+          console.log(`Order ${row.id} status changed to ${status}`);
+        });
       }
     });
   }

@@ -2,7 +2,6 @@ import { Product } from "../../../core/types/product.model";
 import { Status } from "../../../core/types/status.enum";
 
 export class OrderPayload {
-    orderId!: string;
     productId!: string;
     productName!: string;
     quantity!: number;
@@ -14,7 +13,6 @@ export class OrderPayload {
     shopId: number;
 
     constructor(product: Product, form: any, userId: number) {
-        this.orderId = 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
         this.productId = product.id;
         this.productName = product.name;
         this.quantity = form.quantity;
@@ -26,8 +24,3 @@ export class OrderPayload {
         this.shopId = 0
     }
 };
-
-
-
-// user type add
-// user service add
