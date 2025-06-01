@@ -12,6 +12,7 @@ import { ProductService } from '../product.service';
 })
 export class ProductCardComponent {
   @Input() data!: Product;
+  @Input() isInDialog: boolean = false;
   productService = inject(ProductService);
 
   openDialog() {

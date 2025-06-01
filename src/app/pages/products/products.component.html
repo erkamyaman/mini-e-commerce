@@ -5,5 +5,15 @@
 </div>
 
 <p-dialog header="Add" [(visible)]="displayProductDialog" [modal]="true" (onHide)="productService.productAddModal.next(false)" [style]="{ width: '400px' }" class="edit-dialog">
-  {{ productService.chosenProduct.getValue()?.name }}
+  <div>
+    <div>
+      <form [formGroup]="productAddForm" (ngSubmit)="addProduct()" (keypress.enter)="addProduct()">
+        <input pInputText placeholder="quantity" type="number" formControlName="quantity" name="quantity" id="quantity" />
+        <p-button type="submit" label="Login" />
+      </form>
+    </div>
+    @if(productService.chosenProduct.getValue()){
+    <app-product-card [isInDialog]="true" [data]="productService.chosenProduct.getValue()!"></app-product-card>
+    }
+  </div>
 </p-dialog>

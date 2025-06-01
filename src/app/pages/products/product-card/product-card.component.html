@@ -14,10 +14,12 @@
         <span class="font-bold text-black">{{ data.stock }}</span>
       </span>
     </div>
+    @if(!isInDialog){
     <ng-template #footer>
       <div class="flex gap-4 mt-1">
         <p-button icon="pi pi-shopping-bag" (onClick)="openDialog()" label="Order" class="w-full" styleClass="w-full" />
       </div>
     </ng-template>
+    }
   </p-card>
 </div>

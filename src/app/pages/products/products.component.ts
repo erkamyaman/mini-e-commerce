@@ -3,11 +3,12 @@ import { Product } from '../../core/types/product.model';
 import { ProductService } from './product.service';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { DialogModule } from 'primeng/dialog';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-products',
-  imports: [ProductCardComponent, DialogModule],
+  imports: [ReactiveFormsModule, ButtonModule, ProductCardComponent, DialogModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -34,5 +35,9 @@ export class ProductsComponent implements OnInit {
 
   closeDialog() {
     this.productService.productAddModal.next(false);
+  }
+
+  addProduct() {
+    //
   }
 }
