@@ -3,6 +3,7 @@ import { Product } from '../../core/types/product.model';
 import { ProductService } from './product.service';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { DialogModule } from 'primeng/dialog';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
@@ -12,15 +13,26 @@ import { DialogModule } from 'primeng/dialog';
 })
 export class ProductsComponent implements OnInit {
   productService = inject(ProductService);
-  displayProductDialog: boolean = false;
+  displayProductDialog = false;
   products: Product[] = [];
+  productAddForm!: FormGroup;
+
+  constructor(public fb: FormBuilder) {
+    this.productAddForm = this.fb.group({
+      quantity: new FormControl(<number | null>null, Validators.required)
+    });
+  }
   ngOnInit() {
     this.productService.productsObs$.subscribe((data) => {
       this.products = data as Product[];
     });
+
+    this.productService.modalObs$.subscribe(() => {
+      this.displayProductDialog = this.productService.productAddModal.getValue();
+    });
   }
 
   closeDialog() {
-    this.displayProductDialog = false;
+    this.productService.productAddModal.next(false);
   }
 }

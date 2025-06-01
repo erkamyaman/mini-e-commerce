@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { Product } from '../../../core/types/product.model';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-card',
@@ -11,4 +12,10 @@ import { Product } from '../../../core/types/product.model';
 })
 export class ProductCardComponent {
   @Input() data!: Product;
+  productService = inject(ProductService);
+
+  openDialog() {
+    this.productService.productAddModal.next(true);
+    this.productService.chosenProduct.next(this.data);
+  }
 }
