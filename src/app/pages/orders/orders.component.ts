@@ -13,7 +13,7 @@ export type Order = {
   date: string;
   address: string;
   status: 'waiting' | 'accepted' | 'rejected';
-  shop: string
+  shopId: number
 };
 
 @Component({

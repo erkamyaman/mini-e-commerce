@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 101,
+      "id": "101",
       "username": "1",
       "password": "1",
       "role": "manager",
@@ -9,7 +9,7 @@
       "surname": "Yaman"
     },
     {
-      "id": 102,
+      "id": "102",
       "username": "2",
       "password": "2",
       "role": "salesman",
@@ -17,7 +17,7 @@
       "surname": "Yaman"
     },
     {
-      "id": 103,
+      "id": "103",
       "username": "3",
       "password": "3",
       "role": "customer",
@@ -25,7 +25,7 @@
       "surname": "Yaman"
     },
     {
-      "id": 1,
+      "id": "1",
       "username": "aragorn",
       "password": "password1",
       "role": "salesman",
@@ -33,7 +33,7 @@
       "surname": "Elessar"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "legolas",
       "password": "password2",
       "role": "salesman",
@@ -41,7 +41,7 @@
       "surname": "Greenleaf"
     },
     {
-      "id": 3,
+      "id": "3",
       "username": "gandalf",
       "password": "password3",
       "role": "manager",
@@ -49,7 +49,7 @@
       "surname": "the Grey"
     },
     {
-      "id": 4,
+      "id": "4",
       "username": "frodo",
       "password": "password4",
       "role": "customer",
@@ -57,7 +57,7 @@
       "surname": "Baggins"
     },
     {
-      "id": 5,
+      "id": "5",
       "username": "samwise",
       "password": "password5",
       "role": "customer",
@@ -384,83 +384,47 @@
   ],
   "orders": [
     {
-      "id": "5a98",
-      "orderId": "ORD-5RDWYLXZE",
+      "id": "c958",
+      "orderId": "ORD-F6JIAH2QZ",
       "productId": "L001",
       "productName": "The One Ring Replica",
-      "quantity": 3,
-      "userId": 103,
-      "date": "2025-06-01T11:35:50.720Z",
-      "address": "2",
+      "quantity": 2,
+      "userId": "103",
+      "date": "2025-06-01T21:07:44.434Z",
+      "address": "dadad",
       "status": "waiting",
-      "totalAmount": 389.97,
-      "shop": ""
+      "totalAmount": 259.98,
+      "shopId": 1
     },
     {
-      "id": "0d32",
-      "orderId": "ORD-TWZF6ZSVW",
+      "id": "3c83",
+      "orderId": "ORD-RAE7X90LS",
       "productId": "L002",
       "productName": "Gandalf’s Staff",
       "quantity": 2,
-      "userId": 103,
-      "date": "2025-06-01T11:35:54.959Z",
-      "address": "23",
+      "userId": "103",
+      "date": "2025-06-01T21:07:52.790Z",
+      "address": "sdsd",
       "status": "waiting",
       "totalAmount": 399.98,
-      "shop": ""
-    },
-    {
-      "id": "f484",
-      "orderId": "ORD-445ZN85XD",
-      "productId": "L003",
-      "productName": "Arwen’s Evenstar Pendant",
-      "quantity": 23,
-      "userId": 103,
-      "date": "2025-06-01T13:07:30.102Z",
-      "address": "2",
-      "status": "waiting",
-      "totalAmount": 1149.77,
-      "shop": ""
-    },
-    {
-      "id": "680a",
-      "orderId": "ORD-JLH8RFL4W",
-      "productId": "L019",
-      "productName": "LOTR Chess Set",
-      "quantity": 3,
-      "userId": 103,
-      "date": "2025-06-01T13:23:19.105Z",
-      "address": "34",
-      "status": "waiting",
-      "totalAmount": 224.85000000000002,
-      "shop": ""
-    },
-    {
-      "id": "e070",
-      "orderId": "ORD-HEXCT4CA4",
-      "productId": "L002",
-      "productName": "Gandalf’s Staff",
-      "quantity": 4,
-      "userId": 103,
-      "date": "2025-06-01T19:00:00.588Z",
-      "address": "3",
-      "status": "waiting",
-      "totalAmount": 799.96,
-      "shop": ""
+      "shopId": 3
     }
   ],
   "shops": [
     {
       "name": "Mordor Shop",
-      "code": "mordor"
+      "code": "mordor",
+      "id": 1
     },
     {
       "name": "Rivendell Boutique",
-      "code": "rivendell"
+      "code": "rivendell",
+      "id": 2
     },
     {
       "name": "Shire Market",
-      "code": "shire"
+      "code": "shire",
+      "id": 3
     }
   ]
 }

@@ -7,6 +7,7 @@ import { UserService } from '../../../core/service/user.service';
 import { ButtonModule } from 'primeng/button';
 import { ShopService } from '../../../core/service/shop.service';
 import { ConfirmationService } from 'primeng/api';
+import { OrdersService } from '../../../pages/orders/orders.service';
 
 @Component({
   selector: 'app-table',
@@ -18,6 +19,7 @@ export class TableComponent implements OnInit {
   public userService = inject(UserService)
   public shopService = inject(ShopService)
   public confirmationService = inject(ConfirmationService)
+  public orderService = inject(OrdersService)
 
   @Input() cols: Array<{ field: string; header: string }> = [];
   @Input() data: any[] = [];
@@ -34,6 +36,9 @@ export class TableComponent implements OnInit {
     this.shopService.getShops().subscribe((res) => {
       this.shops = res as any[];
     })
+
+    console.log(this.orderService.orders.getValue())
+
   }
 
   getFieldValue(row: any, field: string): any {
@@ -87,7 +92,8 @@ export class TableComponent implements OnInit {
   }
 
   onShopChange(row: any) {
-    console.log('Shop changed for row:', row);
-    console.log('New shop:', row.selectedShop);
+    this.orderService.addShopToOrderById(row.id, row.shopId).subscribe(() => {
+      console.log(this.orderService.orders.getValue())
+    });
   }
 }

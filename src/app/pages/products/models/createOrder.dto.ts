@@ -11,7 +11,7 @@ export class OrderPayload {
     address!: string;
     status!: Status;
     totalAmount!: number;
-    shop!: string;
+    shopId: number;
 
     constructor(product: Product, form: any, userId: number) {
         this.orderId = 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
@@ -23,7 +23,7 @@ export class OrderPayload {
         this.address = form.address;
         this.status = Status.Waiting;
         this.totalAmount = form.quantity * product.price;
-        this.shop = ''
+        this.shopId = 0
     }
 };
 
