@@ -7,35 +7,30 @@ import { loggedInGuard } from './core/guard/logged-in.guard';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 import { roleGuard } from './core/guard/role.guard';
 
-const loadProducts = () =>
-    import('./pages/products/products.component').then(m => m.ProductsComponent);
+const loadProducts = () => import('./pages/products/products.component').then((m) => m.ProductsComponent);
 
-const loadOrders = () =>
-    import('./pages/orders/orders.component').then(m => m.OrdersComponent);
+const loadOrders = () => import('./pages/orders/orders.component').then((m) => m.OrdersComponent);
 
-const loadSales = () =>
-    import('./pages/sales/sales.component').then(m => m.SalesComponent);
+const loadSales = () => import('./pages/sales/sales.component').then((m) => m.SalesComponent);
 
 export const routes: Routes = [
-    { path: 'login', component: LoginComponent, canActivate: [loggedInGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [loggedInGuard] },
 
-    {
-        path: '',
-        canActivate: [authGuard],
-        canActivateChild: [roleGuard],
-        component: LayoutComponent,
-        children: [
-            { path: '', redirectTo: 'products', pathMatch: 'full' },
-            { path: 'products', loadComponent: loadProducts, title: 'Products', data: { roles: ['customer'] } },
-            { path: 'orders', loadComponent: loadOrders, title: 'Orders', data: { roles: ['salesman', 'manager'] } },
-            { path: 'sales', loadComponent: loadSales, title: 'Sales', data: { roles: ['manager'] } }
-        ]
-    },
+  {
+    path: '',
+    canActivate: [authGuard],
+    canActivateChild: [roleGuard],
+    component: LayoutComponent,
+    children: [
+      { path: '', redirectTo: 'products', pathMatch: 'full' },
+      { path: 'products', loadComponent: loadProducts, title: 'Products', data: { roles: ['customer'] } },
+      { path: 'orders', loadComponent: loadOrders, title: 'Orders', data: { roles: ['salesman', 'manager'] } },
+      { path: 'sales', loadComponent: loadSales, title: 'Sales', data: { roles: ['manager'] } }
+    ]
+  },
 
-    { path: 'unauthorized', component: UnauthorizedComponent, title: 'Unauthorized' },
-    { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
-    { path: 'not-found', component: NotFoundComponent, title: '404' },
-
+  // route state
+  { path: 'unauthorized', component: UnauthorizedComponent, title: 'Unauthorized' },
+  { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
+  { path: 'not-found', component: NotFoundComponent, title: '404' }
 ];
-
-

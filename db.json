@@ -24,7 +24,6 @@
       "name": "ErkamCst",
       "surname": "Yaman"
     },
-
     {
       "id": 1,
       "username": "aragorn",
@@ -116,5 +115,6 @@
     { "id": "L044", "name": "Orc Mask", "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOqsdkkzomcbMFRFZSMFdGWVKnv4REy8yHbA&s", "stock": 12, "price": 34.0 },
     { "id": "L047", "name": "Shelob Toy Figure", "img": "https://castlekon.com/wp-content/uploads/2024/09/9420024745632-7.jpg", "stock": 9, "price": 28.5 },
     { "id": "L048", "name": "Helm’s Deep Diorama", "img": "https://i.redd.it/dont-tell-the-elf-helms-deep-diorama-v0-8twufirwoglb1.jpg?width=1440&format=pjpg&auto=webp&s=a2bd8edf31b436b77f7ef6e9c08783840c7313e4", "stock": 3, "price": 135.99 }
-  ]
+  ],
+  "sales": []
 }

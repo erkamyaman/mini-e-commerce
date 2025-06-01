@@ -5,67 +5,64 @@ import { LocalStorageService } from '../../shared/services/local-storage.service
 import { Router } from '@angular/router';
 
 export interface User {
-  id: number,
-  username: string,
-  password: string,
-  role: string,
-  name: string,
-  surname: string,
+  id: number;
+  username: string;
+  password: string;
+  role: string;
+  name: string;
+  surname: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  isAuthenticated = new BehaviorSubject<boolean>(false)
-  authStatus = this.isAuthenticated.asObservable()
+  // not necessary
+  isAuthenticated = new BehaviorSubject<boolean>(false);
+  authStatus = this.isAuthenticated.asObservable();
 
   currentUserSubject = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
-  localStorageService = inject(LocalStorageService)
+  localStorageService = inject(LocalStorageService);
   router = inject(Router);
-
 
   private token = '123';
 
-
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
-    return this.http
-      .get<any[]>(`http://localhost:3000/users`)
-      .pipe(
-        tap(users => {
-          const user = users.find(u => u.username === username && u.password === password);
+    return this.http.get<any[]>(`http://localhost:3000/users`).pipe(
+      tap((users) => {
+        const user = users.find((u) => u.username === username && u.password === password);
 
-          if (user) {
-            this.isAuthenticated.next(true);
-            this.localStorageService.set('token', this.token);
-            this.localStorageService.set('user', JSON.stringify(user));
-            this.currentUserSubject.next(user);
+        if (user) {
+          this.isAuthenticated.next(true);
+          this.localStorageService.set('token', this.token);
+          this.localStorageService.set('user', JSON.stringify(user));
+          this.currentUserSubject.next(user);
 
-            const userRole = this.currentUserSubject.value?.role
+          const userRole = this.currentUserSubject.value?.role;
 
-            switch (userRole) {
-              case 'manager':
-                this.router.navigate(['/sales']);
-                break;
-              case 'salesman':
-                this.router.navigate(['/orders']);
-                break;
-              case 'customer':
-                this.router.navigate(['/products']);
-                break;
-              default:
-                break;
-            }
-          } else {
-            throw new Error('Invalid credentials');
+          // handle redirection ()
+          switch (userRole) {
+            case 'manager':
+              this.router.navigate(['/sales']);
+              break;
+            case 'salesman':
+              this.router.navigate(['/orders']);
+              break;
+            case 'customer':
+              this.router.navigate(['/products']);
+              break;
+            default:
+              break;
           }
-        })
-      );
+        } else {
+          throw new Error('Invalid credentials');
+        }
+      })
+    );
   }
 
   isLoggedIn(): boolean {
@@ -80,11 +77,11 @@ export class AuthService {
   }
 
   getCurrentUser() {
-    return this.currentUserSubject.value
+    return this.currentUserSubject.value;
   }
 
   getCurrentUserRole() {
-    return this.currentUserSubject.value?.role
+    return this.currentUserSubject.value?.role;
   }
 
   setCurrentUser() {

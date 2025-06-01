@@ -6,6 +6,9 @@ import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,12 +16,15 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
+    ConfirmationService,
+    MessageService,
+    DialogService,
     providePrimeNG({
       theme: {
         preset: Aura,
         options: {
-          darkModeSelector: false || "none",
-        },
+          darkModeSelector: false || 'none'
+        }
       }
     })
   ]

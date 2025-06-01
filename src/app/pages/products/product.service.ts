@@ -9,13 +9,19 @@ import { HttpClient } from '@angular/common/http';
 export class ProductService {
   httpService = inject(HttpClient);
 
-  products = new BehaviorSubject<Product[] | null>(null)
-  productsObs$ = this.products.asObservable()
+  products = new BehaviorSubject<Product[] | null>(null);
+  productsObs$ = this.products.asObservable();
+
+  productAddModal = new BehaviorSubject<boolean>(false);
+  modalObs$ = this.productAddModal.asObservable();
+
+  chosenProduct = new BehaviorSubject<Product | null>(null);
+  chosenProObs$ = this.chosenProduct.asObservable();
 
   getProducts(): Observable<Product[]> {
     return this.httpService.get<Product[]>('http://localhost:3000/lotrProducts').pipe(
-      tap(res => this.products.next(res)),
-      catchError(err => {
+      tap((res) => this.products.next(res)),
+      catchError((err) => {
         console.error('Error loading products', err);
         return throwError(() => new Error(err));
       })

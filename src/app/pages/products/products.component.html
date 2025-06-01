@@ -3,3 +3,5 @@
   <app-product-card [data]="product"></app-product-card>
   }
 </div>
+
+<p-dialog header="Add" [(visible)]="displayProductDialog" [modal]="true" (onHide)="closeDialog()" [style]="{ width: '400px' }" class="edit-dialog"></p-dialog>

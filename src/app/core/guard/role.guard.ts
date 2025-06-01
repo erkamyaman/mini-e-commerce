@@ -9,12 +9,12 @@ export const roleGuard: CanActivateChildFn = (route: ActivatedRouteSnapshot, sta
   const expectedRoles = route.data['roles'] as string[];
 
   const isLoggedIn = auth.isLoggedIn();
-  const userRole = auth.getCurrentUser()?.role
+  const userRole = auth.getCurrentUser()?.role;
 
   if (isLoggedIn && userRole && expectedRoles.includes(userRole)) {
     return true;
   } else {
     router.navigate(['/unauthorized']);
-    return false
+    return false;
   }
 };
