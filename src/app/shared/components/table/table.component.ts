@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { ShopService } from '../../../core/service/shop.service';
 import { ConfirmationService } from 'primeng/api';
 import { OrdersService } from '../../../pages/orders/orders.service';
+import { Status } from '../../../core/types/status.enum';
 
 @Component({
   selector: 'app-table',
@@ -57,9 +58,9 @@ export class TableComponent implements OnInit {
     console.log('Delete clicked for:', row);
   }
 
-  changeOrderStatus(row: any, status: string) {
-    this.orderService.changeOrderStatus(row.id, status).subscribe(() => {
-      console.log(`Order ${row.id} status changed to ${status}`);
+  changeOrderStatus(id: string, status: string) {
+    this.orderService.changeOrderStatus(id, status).subscribe(() => {
+      console.log(`Order ${id} status changed to ${status}`);
     });
   }
 
@@ -91,9 +92,7 @@ export class TableComponent implements OnInit {
       acceptButtonStyleClass: operationType !== 'accept' ? 'p-button-danger' : 'p-button-success',
       rejectButtonStyleClass: 'p-button-secondary',
       accept: () => {
-        this.orderService.changeOrderStatus(row.id, operationType).subscribe(() => {
-          console.log(`Order ${row.id} status changed to ${status}`);
-        });
+        this.changeOrderStatus(row.id, operationType)
       }
     });
   }
