@@ -449,7 +449,7 @@
       "shop": ""
     }
   ],
-  "shopOptions": [
+  "shops": [
     {
       "name": "Mordor Shop",
       "code": "mordor"
