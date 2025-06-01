@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../core/service/user.service';
 import { ButtonModule } from 'primeng/button';
 import { ShopService } from '../../../core/service/shop.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-table',
@@ -16,6 +17,7 @@ import { ShopService } from '../../../core/service/shop.service';
 export class TableComponent implements OnInit {
   public userService = inject(UserService)
   public shopService = inject(ShopService)
+  public confirmationService = inject(ConfirmationService)
 
   @Input() cols: Array<{ field: string; header: string }> = [];
   @Input() data: any[] = [];
@@ -44,11 +46,44 @@ export class TableComponent implements OnInit {
 
   rejectOrder(row: any) {
     console.log('Reject clicked for:', row);
-
   }
 
   deleteOrder(row: any) {
     console.log('Delete clicked for:', row);
+  }
+
+
+
+  confirmOperation(operationType: string, row: any) {
+    let operationFunction: () => void;
+
+    switch (operationType) {
+      case 'accept':
+        operationFunction = () => this.acceptOrder(row);
+        break;
+      case 'reject':
+        operationFunction = () => this.rejectOrder(row);
+        break;
+      case 'delete':
+        operationFunction = () => this.deleteOrder(row);
+        break;
+      default:
+        operationFunction = () => { };
+        break;
+    }
+
+    this.confirmationService.confirm({
+      message: `Are you sure you want to ${operationType} this order?`,
+      header: `Confirm ${operationType.charAt(0).toUpperCase() + operationType.slice(1)}`,
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Yes',
+      rejectLabel: 'No',
+      acceptButtonStyleClass: operationType !== 'accept' ? 'p-button-danger' : 'p-button-success',
+      rejectButtonStyleClass: 'p-button-secondary',
+      accept: () => {
+        operationFunction();
+      }
+    });
   }
 
   onShopChange(row: any) {

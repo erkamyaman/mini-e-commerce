@@ -16,9 +16,9 @@
         <td>
           @if(col.field === 'storeActions'){
           <div class="flex">
-            <p-button severity="success" [disabled]="!row.selectedShop" (onClick)="acceptOrder(row)" icon="pi pi-check" appendTo="body" class="p-button-sm"></p-button>
-            <p-button severity="danger" (onClick)="rejectOrder(row)" icon="pi pi-times" appendTo="body" class="p-button-sm"></p-button>
-            <p-button severity="help" (onClick)="deleteOrder(row)" icon="pi pi-trash" appendTo="body" class="p-button-sm"></p-button>
+            <p-button severity="success" [disabled]="!row.selectedShop" (onClick)="confirmOperation('accept', row)" icon="pi pi-check" appendTo="body" class="p-button-sm"></p-button>
+            <p-button severity="danger" (onClick)="confirmOperation('reject', row)" icon="pi pi-times" appendTo="body" class="p-button-sm"></p-button>
+            <p-button severity="help" (onClick)="confirmOperation('delete', row)" icon="pi pi-trash" appendTo="body" class="p-button-sm"></p-button>
           </div>
           }@else if (col.field === 'shop') {
           <p-dropdown [options]="shops" [(ngModel)]="row.selectedShop" optionLabel="name" placeholder="Select Shop" appendTo="body" class="w-full" (onChange)="onShopChange(row)"></p-dropdown>
