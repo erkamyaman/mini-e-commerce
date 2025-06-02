@@ -20,7 +20,7 @@ export class OrdersService {
   getOrders(): Observable<Order[]> {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
       tap((res) => {
-        const filteredOrders = res.filter(order => order.status !== StatusLabels.accepted);
+        const filteredOrders = res.filter(order => order.status !== StatusLabels.accepted && order.status !== StatusLabels.wfa);
         this.orders.next(filteredOrders);
       }),
       catchError((err: any) => {
@@ -33,7 +33,10 @@ export class OrdersService {
   getAcceptedOrders(): Observable<Order[]> {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
       tap((res) => {
-        const acceptedOrders = res.filter(order => order.status === StatusLabels.accepted);
+
+        const acceptedOrders = res.filter(order =>
+          order.status === StatusLabels.wfa || order.status === StatusLabels.accepted
+        );
         this.acceptedOrders.next(acceptedOrders);
       }),
       catchError((err: any) => {

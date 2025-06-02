@@ -27,6 +27,8 @@ export class TableComponent implements OnInit {
 
   @Input() cols: Array<{ field: string; header: string }> = [];
   @Input() data: any[] = [];
+  @Input() isFromSales: boolean = false;
+
   current: any;
   shops: any[] = []
   statusLabels: any = StatusLabels;
@@ -54,7 +56,7 @@ export class TableComponent implements OnInit {
     });
   }
 
-  confirmOperation(operationType: 'accept' | 'reject' | 'delete', status: string, row: any) {
+  confirmOperation(operationType: 'accept' | 'reject' | 'delete' | 'forward', status: string, row: any) {
     // let operationFunction: () => void;
 
     // switch (operationType) {
@@ -70,10 +72,10 @@ export class TableComponent implements OnInit {
     //   default:
     //     operationFunction = () => { };
     //     break;
-    // }
+    // } .  
     console.log(status)
     this.confirmationService.confirm({
-      message: `Are you sure you want to ${operationType} this order?`,
+      message: `Are you sure you want to ${operationType} this order${operationType === "forward" ? " to the Sales" : ""}?`,
       header: `Confirm ${operationType.charAt(0).toUpperCase() + operationType.slice(1)}`,
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Yes',

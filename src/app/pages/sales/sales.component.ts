@@ -16,9 +16,7 @@ export class SalesComponent {
 
   ngOnInit() {
     this.ordersService.acceptedOrdersObs$.subscribe((data) => {
-      console.log(data)
       this.orders = data as Order[];
-      console.log(this.orders)
     });
   }
 
@@ -27,11 +25,11 @@ export class SalesComponent {
     { field: 'status', header: 'Product Status' },
     { field: 'shop', header: 'Shop' },
     { field: 'customerName', header: 'Customer Name' },
+    { field: 'salesman.name', header: 'Accepted By' },
     { field: 'date', header: 'Order Date' },
     { field: 'quantity', header: 'Order Amount' },
     { field: 'totalAmount', header: 'Total Amount' },
     { field: 'address', header: 'Address' },
     { field: 'storeActions', header: 'Store Actions' },
-
   ];
 }

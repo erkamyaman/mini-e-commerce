@@ -433,9 +433,17 @@
       "userId": "103",
       "date": "2025-06-02T12:37:58.591Z",
       "address": "3",
-      "status": "waiting",
+      "status": "Waiting for Approval",
       "totalAmount": 399.98,
-      "shopId": 0
+      "shopId": "1",
+      "salesman": {
+        "id": "101",
+        "username": "1",
+        "password": "1",
+        "role": "manager",
+        "name": "ErkamMNGR",
+        "surname": "Yaman"
+      }
     }
   ],
   "shops": [

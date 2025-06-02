@@ -16,12 +16,18 @@
         <td>
           @if(col.field === 'storeActions'){
           <div class="flex">
-            <p-button severity="success" [disabled]="!row.shopId" (onClick)="confirmOperation('accept', statusLabels.accepted, row)" icon="pi pi-check" appendTo="body" class="p-button-sm"></p-button>
-            <p-button severity="danger" (onClick)="confirmOperation('reject', statusLabels.rejected, row)" icon="pi pi-times" appendTo="body" class="p-button-sm"></p-button>
+            @if(isFromSales){
+            <p-button severity="success" [disabled]="!row.shopId || row.status === 'Accepted'" (onClick)="confirmOperation('accept', statusLabels.accepted, row)" icon="pi pi-check" appendTo="body" class="p-button-sm"></p-button>
+            }@else {
+            <p-button severity="info" [disabled]="!row.shopId" (onClick)="confirmOperation('forward', statusLabels.wfa, row)" icon="pi pi-send" appendTo="body" class="p-button-sm"></p-button>
+            }
+            <p-button severity="danger" [disabled]="row.status === 'Accepted'" (onClick)="confirmOperation('reject', statusLabels.rejected, row)" icon="pi pi-times" appendTo="body" class="p-button-sm"></p-button>
+            @if(!isFromSales){
             <p-button severity="help" (onClick)="confirmOperation('delete', statusLabels.deleted, row)" icon="pi pi-trash" appendTo="body" class="p-button-sm"></p-button>
+            }
           </div>
           }@else if (col.field === 'shop') {
-          <p-dropdown [options]="shops" optionLabel="name" optionValue="id" [(ngModel)]="row.shopId" placeholder="Select Shop" appendTo="body" class="w-full" (onChange)="onShopChange(row)"></p-dropdown>
+          <p-dropdown [options]="shops" optionLabel="name" optionValue="id" [disabled]="isFromSales" [(ngModel)]="row.shopId" placeholder="Select Shop" appendTo="body" class="w-full" (onChange)="onShopChange(row)"></p-dropdown>
           } @else { {{ getFieldValue(row, col.field) }} }
         </td>
         }
