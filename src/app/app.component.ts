@@ -19,7 +19,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getProducts().subscribe();
-    this.ordersService.getOrders().subscribe()
+    this.ordersService.getAcceptedOrders().subscribe();
+    this.ordersService.getOrders().subscribe();
     this.authService.setCurrentUser();
   }
 }

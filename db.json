@@ -392,9 +392,17 @@
       "userId": "103",
       "date": "2025-06-01T21:07:44.434Z",
       "address": "dadad",
-      "status": "accept",
+      "status": "Accepted",
       "totalAmount": 259.98,
-      "shopId": "2"
+      "shopId": "2",
+      "salesman": {
+        "id": "102",
+        "username": "2",
+        "password": "2",
+        "role": "salesman",
+        "name": "ErkamSLM",
+        "surname": "Yaman"
+      }
     },
     {
       "id": "3c83",
@@ -405,9 +413,29 @@
       "userId": "103",
       "date": "2025-06-01T21:07:52.790Z",
       "address": "sdsd",
-      "status": "delete",
+      "status": "Accepted",
       "totalAmount": 399.98,
-      "shopId": "2"
+      "shopId": "2",
+      "salesman": {
+        "id": "102",
+        "username": "2",
+        "password": "2",
+        "role": "salesman",
+        "name": "ErkamSLM",
+        "surname": "Yaman"
+      }
+    },
+    {
+      "id": "df4c",
+      "productId": "L002",
+      "productName": "Gandalf’s Staff",
+      "quantity": 2,
+      "userId": "103",
+      "date": "2025-06-02T12:37:58.591Z",
+      "address": "3",
+      "status": "waiting",
+      "totalAmount": 399.98,
+      "shopId": 0
     }
   ],
   "shops": [

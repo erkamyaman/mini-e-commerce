@@ -8,7 +8,9 @@ import { ButtonModule } from 'primeng/button';
 import { ShopService } from '../../../core/service/shop.service';
 import { ConfirmationService } from 'primeng/api';
 import { OrdersService } from '../../../pages/orders/orders.service';
-import { Status } from '../../../core/types/status.enum';
+import { Status, StatusLabels } from '../../../core/types/status.enum';
+import { AuthService } from '../../../core/service/auth.service';
+import { User } from '../../../core/types/user.model';
 
 @Component({
   selector: 'app-table',
@@ -18,6 +20,7 @@ import { Status } from '../../../core/types/status.enum';
 })
 export class TableComponent implements OnInit {
   public userService = inject(UserService)
+  public authService = inject(AuthService)
   public shopService = inject(ShopService)
   public confirmationService = inject(ConfirmationService)
   public orderService = inject(OrdersService)
@@ -26,8 +29,10 @@ export class TableComponent implements OnInit {
   @Input() data: any[] = [];
   current: any;
   shops: any[] = []
+  statusLabels: any = StatusLabels;
 
   ngOnInit(): void {
+    console.log(this.data)
     this.data.forEach(element => {
       this.userService.getUserById(element.userId).subscribe(user => {
         element.customerName = user.name;
@@ -37,36 +42,19 @@ export class TableComponent implements OnInit {
     this.shopService.getShops().subscribe((res) => {
       this.shops = res as any[];
     })
-
-    console.log(this.orderService.orders.getValue())
-
   }
 
   getFieldValue(row: any, field: string): any {
     return field.split('.').reduce((val, key) => val?.[key], row);
   }
 
-  acceptOrder(row: any) {
-    console.log('Edit clicked for:', row);
-  }
-
-  rejectOrder(row: any) {
-    console.log('Reject clicked for:', row);
-  }
-
-  deleteOrder(row: any) {
-    console.log('Delete clicked for:', row);
-  }
-
-  changeOrderStatus(id: string, status: string) {
-    this.orderService.changeOrderStatus(id, status).subscribe(() => {
+  changeOrderStatus(id: string, status: string, user: User) {
+    this.orderService.changeOrderStatus(id, status, user).subscribe(() => {
       console.log(`Order ${id} status changed to ${status}`);
     });
   }
 
-
-
-  confirmOperation(operationType: string, row: any) {
+  confirmOperation(operationType: 'accept' | 'reject' | 'delete', status: string, row: any) {
     // let operationFunction: () => void;
 
     // switch (operationType) {
@@ -83,6 +71,7 @@ export class TableComponent implements OnInit {
     //     operationFunction = () => { };
     //     break;
     // }
+    console.log(status)
     this.confirmationService.confirm({
       message: `Are you sure you want to ${operationType} this order?`,
       header: `Confirm ${operationType.charAt(0).toUpperCase() + operationType.slice(1)}`,
@@ -92,7 +81,12 @@ export class TableComponent implements OnInit {
       acceptButtonStyleClass: operationType !== 'accept' ? 'p-button-danger' : 'p-button-success',
       rejectButtonStyleClass: 'p-button-secondary',
       accept: () => {
-        this.changeOrderStatus(row.id, operationType)
+        const currentUser = this.authService.getCurrentUser();
+        if (currentUser) {
+          this.changeOrderStatus(row.id, status, currentUser);
+        } else {
+          console.error('No current user found.');
+        }
       }
     });
   }

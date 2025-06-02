@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { Order } from './orders.component';
+import { User } from '../../core/types/user.model';
+import { StatusLabels } from '../../core/types/status.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +14,30 @@ export class OrdersService {
   orders = new BehaviorSubject<Order[] | null>(null);
   ordersObs$ = this.orders.asObservable();
 
+  acceptedOrders = new BehaviorSubject<Order[] | null>(null);
+  acceptedOrdersObs$ = this.acceptedOrders.asObservable();
+
   getOrders(): Observable<Order[]> {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
-      tap((res) => this.orders.next(res)),
+      tap((res) => {
+        const filteredOrders = res.filter(order => order.status !== StatusLabels.accepted);
+        this.orders.next(filteredOrders);
+      }),
       catchError((err: any) => {
         console.error('Error loading products', err);
+        return throwError(() => new Error(err));
+      })
+    );
+  }
+
+  getAcceptedOrders(): Observable<Order[]> {
+    return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
+      tap((res) => {
+        const acceptedOrders = res.filter(order => order.status === StatusLabels.accepted);
+        this.acceptedOrders.next(acceptedOrders);
+      }),
+      catchError((err: any) => {
+        console.error('Error loading accepted orders', err);
         return throwError(() => new Error(err));
       })
     );
@@ -45,10 +66,9 @@ export class OrdersService {
       );
   }
 
-  changeOrderStatus(id: string, status: string): Observable<Order> {
-    console.log(id)
+  changeOrderStatus(id: string, status: string, user: User): Observable<Order> {
     return this.httpService
-      .patch<Order>(`http://localhost:3000/orders/${id}`, { status })
+      .patch<Order>(`http://localhost:3000/orders/${id}`, { status, salesman: user })
       .pipe(
         tap((updatedOrder) => {
           const currentOrders = this.orders.value;
