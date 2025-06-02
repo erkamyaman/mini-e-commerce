@@ -1,9 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 import { Order } from './orders.component';
 import { User } from '../../core/types/user.model';
 import { StatusLabels } from '../../core/types/status.enum';
+
+export interface SalesReport {
+  totalOrders: number;
+  totalSales: number;
+  deletedOrders: number;
+  approvedSales: number;
+  revenue: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -90,6 +99,26 @@ export class OrdersService {
           return throwError(() => new Error(err));
         })
       );
+  }
+
+  getSalesReport(): Observable<SalesReport> {
+    return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
+      map((orders: Order[]) => {
+        const totalOrders = orders.length;
+        const deletedOrders = orders.filter(o => o.status === StatusLabels.deleted).length;
+        const approvedSales = orders.filter(o => o.status === StatusLabels.accepted);
+        const totalSales = orders.filter(o => o.status !== StatusLabels.wfa).length;
+        const revenue = approvedSales.reduce((sum, o) => sum + o.totalAmount, 0);
+
+        return {
+          totalOrders,
+          totalSales,
+          deletedOrders,
+          approvedSales: approvedSales.length,
+          revenue
+        };
+      })
+    );
   }
 
 

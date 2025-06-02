@@ -1,1 +1,57 @@
-<app-table [cols]="cols" [data]="orders" [isFromSales]="true"></app-table>
+<p-tabs value="0">
+  <p-tablist>
+    <p-tab value="0">Sales</p-tab>
+    <p-tab value="1">Report</p-tab>
+  </p-tablist>
+  <p-tabpanels>
+    <p-tabpanel value="0">
+      <app-table [cols]="cols" [data]="orders" [isFromSales]="true"></app-table>
+    </p-tabpanel>
+    <p-tabpanel value="1">
+      <div class="bg-white shadow-md rounded-xl p-6 mt-6">
+        <h2 class="text-xl font-semibold mb-4">Sales Report</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
+            <div>
+              <p class="text-sm text-gray-500">Approved Sales</p>
+              <p class="text-xl font-bold">{{ report?.approvedSales }}</p>
+            </div>
+            <i class="pi pi-check-circle text-green-500 text-3xl"></i>
+          </div>
+
+          <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
+            <div>
+              <p class="text-sm text-gray-500">Total Sales</p>
+              <p class="text-xl font-bold">{{ report?.totalSales }}</p>
+            </div>
+            <i class="pi pi-shopping-cart text-blue-500 text-3xl"></i>
+          </div>
+
+          <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
+            <div>
+              <p class="text-sm text-gray-500">Total Orders</p>
+              <p class="text-xl font-bold">{{ report?.totalOrders }}</p>
+            </div>
+            <i class="pi pi-inbox text-yellow-500 text-3xl"></i>
+          </div>
+
+          <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
+            <div>
+              <p class="text-sm text-gray-500">Deleted Orders</p>
+              <p class="text-xl font-bold">{{ report?.deletedOrders }}</p>
+            </div>
+            <i class="pi pi-times-circle text-red-500 text-3xl"></i>
+          </div>
+
+          <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
+            <div>
+              <p class="text-sm text-gray-500">Revenue</p>
+              <p class="text-xl font-bold">${{ report?.revenue | number : '1.2-2' }}</p>
+            </div>
+            <i class="pi pi-dollar text-purple-600 text-3xl"></i>
+          </div>
+        </div>
+      </div>
+    </p-tabpanel>
+  </p-tabpanels>
+</p-tabs>

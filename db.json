@@ -444,6 +444,38 @@
         "name": "ErkamMNGR",
         "surname": "Yaman"
       }
+    },
+    {
+      "id": "2586",
+      "productId": "L014",
+      "productName": "Andúril Sword Replica",
+      "quantity": 4,
+      "userId": "103",
+      "date": "2025-06-02T18:10:24.857Z",
+      "address": "3",
+      "status": "Deleted",
+      "totalAmount": 999.96,
+      "shopId": 0,
+      "salesman": {
+        "id": "101",
+        "username": "1",
+        "password": "1",
+        "role": "manager",
+        "name": "ErkamMNGR",
+        "surname": "Yaman"
+      }
+    },
+    {
+      "id": "5baa",
+      "productId": "L015",
+      "productName": "Mordor Mug",
+      "quantity": 4,
+      "userId": "103",
+      "date": "2025-06-02T18:10:29.987Z",
+      "address": "2",
+      "status": "waiting",
+      "totalAmount": 43.96,
+      "shopId": 0
     }
   ],
   "shops": [

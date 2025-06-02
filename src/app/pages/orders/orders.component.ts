@@ -13,7 +13,8 @@ export type Order = {
   date: string;
   address: string;
   status: Status;
-  shopId: number
+  shopId: number;
+  totalAmount: number;
 };
 
 @Component({

@@ -23,4 +23,59 @@ body {
 
     --p-button-primary-focus-ring-color: #ffcc80 !important;
     --p-button-primary-focus-ring-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.4) !important;
+    --p-tabs-transition-duration: 0.2s;
+
+    /* Tablist */
+
+    /* Tab */
+    --p-tabs-tab-background: transparent !important;
+    --p-tabs-tab-hover-background: #fff5e6 !important;
+    --p-tabs-tab-border-width: 1px;
+    --p-tabs-tab-border-color: #FF9900 !important;
+    --p-tabs-tab-hover-border-color: #e88a00 !important;
+    --p-tabs-tab-active-border-color: #FF9900 !important;
+    --p-tabs-tab-color: #000000 !important;
+    --p-tabs-tab-hover-color: #e88a00 !important;
+    --p-tabs-tab-active-color: #FF9900 !important;
+    --p-tabs-tab-font-weight: 500;
+    --p-tabs-tab-margin: 0;
+    --p-tabs-tab-gap: 0.5rem;
+
+    /* Tab Focus */
+    --p-tabs-tab-focus-ring-width: 2px;
+    --p-tabs-tab-focus-ring-style: solid;
+    --p-tabs-tab-focus-ring-color: #ffcc80 !important;
+    --p-tabs-tab-focus-ring-offset: 2px;
+    --p-tabs-tab-focus-ring-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.4) !important;
+
+    /* Tabpanel */
+    --p-tabs-tabpanel-background: #ffffff;
+    --p-tabs-tabpanel-color: #000000;
+    --p-tabs-tabpanel-padding: 1rem;
+    --p-tabs-tabpanel-focus-ring-width: 2px;
+    --p-tabs-tabpanel-focus-ring-style: solid;
+    --p-tabs-tabpanel-focus-ring-color: #ffcc80;
+    --p-tabs-tabpanel-focus-ring-offset: 2px;
+    --p-tabs-tabpanel-focus-ring-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.4);
+
+    /* Nav Buttons */
+    --p-tabs-nav-button-background: #FF9900 !important;
+    --p-tabs-nav-button-color: #ffffff;
+    --p-tabs-nav-button-hover-color: #ffffff;
+    --p-tabs-nav-button-width: 2rem;
+    --p-tabs-nav-button-focus-ring-width: 2px;
+    --p-tabs-nav-button-focus-ring-style: solid;
+    --p-tabs-nav-button-focus-ring-color: #ffcc80;
+    --p-tabs-nav-button-focus-ring-offset: 2px;
+    --p-tabs-nav-button-focus-ring-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.4) !important;
+    --p-tabs-nav-button-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    /* Active Bar */
+    --p-tabs-active-bar-height: 3px;
+    --p-tabs-active-bar-bottom: 0;
+    --p-tabs-active-bar-background: #FF9900 !important;
+
+    --p-tabs-tab-active-color: #FF9900 !important;
+    --p-tabs-tablist-border-color: #FF9900 !important;
+    --p-tabs-tab-active-border-color: #FF9900 !important;
 }
