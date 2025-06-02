@@ -107,7 +107,7 @@ export class OrdersService {
         const totalOrders = orders.length;
         const deletedOrders = orders.filter(o => o.status === StatusLabels.deleted).length;
         const approvedSales = orders.filter(o => o.status === StatusLabels.accepted);
-        const totalSales = orders.filter(o => o.status !== StatusLabels.wfa).length;
+        const totalSales = orders.filter(o => o.status === StatusLabels.wfa || o.status === StatusLabels.accepted).length;
         const revenue = approvedSales.reduce((sum, o) => sum + o.totalAmount, 0);
 
         return {

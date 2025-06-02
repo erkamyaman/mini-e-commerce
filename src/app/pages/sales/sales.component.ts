@@ -35,7 +35,7 @@ export class SalesComponent {
     { field: 'status', header: 'Product Status' },
     { field: 'shop', header: 'Shop' },
     { field: 'customerName', header: 'Customer Name' },
-    { field: 'salesman.name', header: 'Accepted By' },
+    { field: 'salesman.name', header: 'Forwarded By' },
     { field: 'date', header: 'Order Date' },
     { field: 'quantity', header: 'Order Amount' },
     { field: 'totalAmount', header: 'Total Amount' },

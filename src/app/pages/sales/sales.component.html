@@ -5,18 +5,21 @@
   </p-tablist>
   <p-tabpanels>
     <p-tabpanel value="0">
-      <app-table [cols]="cols" [data]="orders" [isFromSales]="true"></app-table>
+      <div class="bg-white shadow-md rounded-xl p-6 mt-6">
+        <h2 class="text-xl font-semibold mb-4">Sales Table</h2>
+        <app-table [cols]="cols" [data]="orders" [isFromSales]="true"></app-table>
+      </div>
     </p-tabpanel>
     <p-tabpanel value="1">
       <div class="bg-white shadow-md rounded-xl p-6 mt-6">
         <h2 class="text-xl font-semibold mb-4">Sales Report</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
             <div>
-              <p class="text-sm text-gray-500">Approved Sales</p>
-              <p class="text-xl font-bold">{{ report?.approvedSales }}</p>
+              <p class="text-sm text-gray-500">Total Orders</p>
+              <p class="text-xl font-bold">{{ report?.totalOrders }}</p>
             </div>
-            <i class="pi pi-check-circle text-green-500 text-3xl"></i>
+            <i class="pi pi-inbox text-yellow-500 text-3xl"></i>
           </div>
 
           <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
@@ -29,10 +32,10 @@
 
           <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
             <div>
-              <p class="text-sm text-gray-500">Total Orders</p>
-              <p class="text-xl font-bold">{{ report?.totalOrders }}</p>
+              <p class="text-sm text-gray-500">Approved Sales</p>
+              <p class="text-xl font-bold">{{ report?.approvedSales }}</p>
             </div>
-            <i class="pi pi-inbox text-yellow-500 text-3xl"></i>
+            <i class="pi pi-check-circle text-green-500 text-3xl"></i>
           </div>
 
           <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
