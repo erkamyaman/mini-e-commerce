@@ -104,10 +104,10 @@ export class OrdersService {
   getSalesReport(): Observable<SalesReport> {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
       map((orders: Order[]) => {
-        const totalOrders = orders.length;
+        const totalSales = orders.filter(o => o.status === StatusLabels.wfa || o.status === StatusLabels.accepted).length;
+        const totalOrders = orders.length - totalSales;
         const deletedOrders = orders.filter(o => o.status === StatusLabels.deleted).length;
         const approvedSales = orders.filter(o => o.status === StatusLabels.accepted);
-        const totalSales = orders.filter(o => o.status === StatusLabels.wfa || o.status === StatusLabels.accepted).length;
         const revenue = approvedSales.reduce((sum, o) => sum + o.totalAmount, 0);
 
         return {

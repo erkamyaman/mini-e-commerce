@@ -13,7 +13,9 @@
     <p-tabpanel value="1">
       <div class="bg-white shadow-md rounded-xl p-6 mt-6">
         <h2 class="text-xl font-semibold mb-4">Sales Report</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-6">
+          <!-- Total Orders -->
           <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
             <div>
               <p class="text-sm text-gray-500">Total Orders</p>
@@ -22,6 +24,7 @@
             <i class="pi pi-inbox text-yellow-500 text-3xl"></i>
           </div>
 
+          <!-- Total Sales -->
           <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
             <div>
               <p class="text-sm text-gray-500">Total Sales</p>
@@ -30,6 +33,7 @@
             <i class="pi pi-shopping-cart text-blue-500 text-3xl"></i>
           </div>
 
+          <!-- Approved Sales -->
           <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
             <div>
               <p class="text-sm text-gray-500">Approved Sales</p>
@@ -38,6 +42,7 @@
             <i class="pi pi-check-circle text-green-500 text-3xl"></i>
           </div>
 
+          <!-- Deleted Orders -->
           <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
             <div>
               <p class="text-sm text-gray-500">Deleted Orders</p>
@@ -46,6 +51,7 @@
             <i class="pi pi-times-circle text-red-500 text-3xl"></i>
           </div>
 
+          <!-- Revenue -->
           <div class="flex items-center justify-between p-4 rounded-lg bg-gray-50">
             <div>
               <p class="text-sm text-gray-500">Revenue</p>
@@ -53,6 +59,10 @@
             </div>
             <i class="pi pi-dollar text-purple-600 text-3xl"></i>
           </div>
+        </div>
+
+        <div class="flex justify-center">
+          <p-chart type="pie" [data]="data" [options]="options" style="max-width: 300px; width: 100%" />
         </div>
       </div>
     </p-tabpanel>

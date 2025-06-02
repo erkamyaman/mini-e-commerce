@@ -6,10 +6,10 @@ import { Menu } from 'primeng/menu';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AppService } from '../../app.service';
 import { AuthService } from '../../core/service/auth.service';
-import { TieredMenu } from 'primeng/tieredmenu';
+
 @Component({
   selector: 'app-navbar',
-  imports: [AvatarModule, ButtonModule, Menu, RouterLink, TieredMenu, RouterLinkActive],
+  imports: [AvatarModule, ButtonModule, Menu, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })

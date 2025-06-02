@@ -385,7 +385,6 @@
   "orders": [
     {
       "id": "c958",
-      "orderId": "ORD-F6JIAH2QZ",
       "productId": "L001",
       "productName": "The One Ring Replica",
       "quantity": 2,
@@ -406,7 +405,6 @@
     },
     {
       "id": "3c83",
-      "orderId": "ORD-RAE7X90LS",
       "productId": "L002",
       "productName": "Gandalf’s Staff",
       "quantity": 2,
@@ -433,7 +431,7 @@
       "userId": "103",
       "date": "2025-06-02T12:37:58.591Z",
       "address": "3",
-      "status": "Waiting for Approval",
+      "status": "Accepted",
       "totalAmount": 399.98,
       "shopId": "1",
       "salesman": {
