@@ -459,7 +459,7 @@
       "userId": "103",
       "date": "2025-06-02T18:10:24.857Z",
       "address": "3",
-      "status": "Deleted",
+      "status": "Accepted",
       "totalAmount": 999.96,
       "shopId": "2",
       "salesman": {
@@ -499,7 +499,7 @@
       "userId": "103",
       "date": "2025-06-04T17:29:36.644Z",
       "address": "3",
-      "status": "Waiting for Approval",
+      "status": "Accepted",
       "totalAmount": 26,
       "shopId": "1",
       "salesman": {
@@ -522,6 +522,126 @@
       "status": "Waiting for Approval",
       "totalAmount": 399.98,
       "shopId": "3",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "74b8",
+      "productId": "L002",
+      "productName": "Gandalf’s Staff",
+      "quantity": 3,
+      "userId": "100",
+      "date": "2025-06-04T17:54:56.804Z",
+      "address": "3",
+      "status": "Waiting for Approval",
+      "totalAmount": 599.97,
+      "shopId": "2",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "6f88",
+      "productId": "L002",
+      "productName": "Gandalf’s Staff",
+      "quantity": 3,
+      "userId": "100",
+      "date": "2025-06-04T17:57:46.703Z",
+      "address": "3",
+      "status": "Waiting for Approval",
+      "totalAmount": 599.97,
+      "shopId": "2",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "9339",
+      "productId": "L001",
+      "productName": "The One Ring Replica",
+      "quantity": 3,
+      "userId": "100",
+      "date": "2025-06-04T18:00:48.560Z",
+      "address": "3",
+      "status": "Waiting for Approval",
+      "totalAmount": 389.97,
+      "shopId": "3",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "d906",
+      "productId": "L005",
+      "productName": "Middle-earth Map Poster",
+      "quantity": 3,
+      "userId": "100",
+      "date": "2025-06-04T18:01:51.039Z",
+      "address": "3",
+      "status": "Waiting for Approval",
+      "totalAmount": 44.97,
+      "shopId": "1",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "d54c",
+      "productId": "L017",
+      "productName": "Shire Pint Glass",
+      "quantity": 22,
+      "userId": "100",
+      "date": "2025-06-04T18:04:56.660Z",
+      "address": "23",
+      "status": "Waiting for Approval",
+      "totalAmount": 286,
+      "shopId": "2",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "8192",
+      "productId": "L011",
+      "productName": "Gondor T-Shirt",
+      "quantity": 22,
+      "userId": "100",
+      "date": "2025-06-04T18:05:38.507Z",
+      "address": "3",
+      "status": "Accepted",
+      "totalAmount": 495,
+      "shopId": "2",
       "salesman": {
         "id": "100",
         "username": "god",
