@@ -30,18 +30,11 @@ export class SalesComponent {
       this.orders = data as Order[];
     });
 
-    this.ordersService.salesReportObs$.subscribe((data) => {
-      if (data) {
-        this.report = data;
-        this.initChart();
-      }
-    });
-
-    this.ordersService.getAcceptedOrders().subscribe();
     this.ordersService.getSalesReport().subscribe((data) => {
-      this.report = data;
-      this.initChart();
-    });
+      this.report = data
+      this.initChart()
+    })
+
   }
 
   cols = [

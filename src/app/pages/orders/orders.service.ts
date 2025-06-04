@@ -26,9 +26,6 @@ export class OrdersService {
   acceptedOrders = new BehaviorSubject<Order[] | null>(null);
   acceptedOrdersObs$ = this.acceptedOrders.asObservable();
 
-  salesReport = new BehaviorSubject<SalesReport | null>(null);
-  salesReportObs$ = this.salesReport.asObservable();
-
   getOrders(): Observable<Order[]> {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
       tap((res) => {
@@ -120,7 +117,6 @@ export class OrdersService {
           revenue
         };
 
-        this.salesReport.next(report);
         return report;
       })
     );
