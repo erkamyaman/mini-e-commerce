@@ -37,7 +37,6 @@ export class ProductService {
   addProductToSales(dto: OrderPayload): Observable<Order> {
     return this.httpService.post<Order>('http://localhost:3000/orders', dto).pipe(
       tap((res: Order) => {
-        console.log(res)
         const currentOrders = this.orderService.orders.value ?? [];
         this.orderService.orders.next([...currentOrders, res]);
       }),

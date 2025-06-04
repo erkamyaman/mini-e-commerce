@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, forkJoin, map, Observable, switchMap, tap, throwError } from 'rxjs';
 import { Order } from './orders.component';
 import { User } from '../../core/types/user.model';
 import { StatusLabels } from '../../core/types/status.enum';
@@ -82,6 +82,8 @@ export class OrdersService {
       .patch<Order>(`http://localhost:3000/orders/${id}`, { status, salesman: user })
       .pipe(
         tap((updatedOrder) => {
+
+
           const currentOrders = this.orders.value;
           if (!currentOrders) return;
 
@@ -91,7 +93,24 @@ export class OrdersService {
               : order
           );
 
-          this.orders.next(updatedOrders);
+          const filteredOrders = updatedOrders.filter(order => order.status !== StatusLabels.accepted && order.status !== StatusLabels.wfa);
+          this.orders.next(filteredOrders);
+
+          const currentAcceptedOrders = this.acceptedOrders.value ?? [];
+          let updatedAcceptedOrders = currentAcceptedOrders.map(order =>
+            order.id === updatedOrder.id ? updatedOrder : order
+          );
+
+          if (
+            (updatedOrder.status === StatusLabels.accepted || updatedOrder.status === StatusLabels.wfa) &&
+            !updatedAcceptedOrders.some(order => order.id === updatedOrder.id)
+          ) {
+            updatedAcceptedOrders = [...updatedAcceptedOrders, updatedOrder];
+          }
+
+
+          this.acceptedOrders.next(updatedAcceptedOrders);
+
         }),
         catchError((err: any) => {
           console.error('Error updating order', err);
@@ -118,6 +137,27 @@ export class OrdersService {
         };
 
         return report;
+      })
+    );
+  }
+
+  deleteAllOrders(): Observable<void> {
+    return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
+      switchMap((orders) => {
+        const deleteRequests = orders.map(order =>
+          this.httpService.delete(`http://localhost:3000/orders/${order.id}`)
+        );
+        return forkJoin(deleteRequests).pipe(
+          map(() => void 0)
+        );
+      }),
+      tap(() => {
+        this.orders.next(null);
+        this.acceptedOrders.next(null);
+      }),
+      catchError((err) => {
+        console.error('Error deleting orders:', err);
+        return throwError(() => new Error(err?.message || 'Unknown error'));
       })
     );
   }

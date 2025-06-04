@@ -94,7 +94,6 @@ export class AuthService {
     if (userJson) {
       const user = JSON.parse(userJson) as User;
       this.currentUserSubject.next(user);
-      console.log(this.currentUserSubject.value);
     }
   }
 }

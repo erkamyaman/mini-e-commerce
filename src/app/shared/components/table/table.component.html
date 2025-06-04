@@ -28,6 +28,8 @@
           </div>
           }@else if (col.field === 'shop') {
           <p-dropdown [options]="shops" optionLabel="name" optionValue="id" [disabled]="isFromSales" [(ngModel)]="row.shopId" placeholder="Select Shop" appendTo="body" class="w-full" (onChange)="onShopChange(row)"></p-dropdown>
+          }@else if (col.field==='date') {
+          {{ row.date | date : 'medium' }}
           } @else { {{ getFieldValue(row, col.field) }} }
         </td>
         }

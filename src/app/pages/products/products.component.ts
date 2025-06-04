@@ -9,6 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MessageService } from 'primeng/api';
 import { OrderPayload } from './models/createOrder.dto';
 import { AuthService } from '../../core/service/auth.service';
+import { OrdersService } from '../orders/orders.service';
 
 @Component({
   selector: 'app-products',
@@ -20,6 +21,7 @@ export class ProductsComponent implements OnInit {
   productService = inject(ProductService);
   messageService = inject(MessageService);
   authService = inject(AuthService)
+  ordersService = inject(OrdersService)
 
   displayProductDialog = false;
   products: Product[] = [];
@@ -64,6 +66,21 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  addProductQuick() {
+    this.productAddForm.get('address')?.setValue('1')
+    this.productAddForm.get('quantity')?.setValue(1)
+    const orderPayload: OrderPayload = new OrderPayload(this.chosenProduct, this.productAddForm.getRawValue(), this.authService.getCurrentUserId())
+    this.productService.addProductToSales(orderPayload).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully' });
+        this.closeDialog();
+      },
+      error: (err) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to add product' });
+      }
+    });
+  }
+
   totalAmount() {
     const chosenProduct = this.productService.chosenProduct.getValue();
     if (chosenProduct) {
@@ -78,5 +95,17 @@ export class ProductsComponent implements OnInit {
       return chosenProduct.stock;
     }
     return 0;
+  }
+
+  deleteAllOrders() {
+    this.ordersService.deleteAllOrders().subscribe({
+      next: () => {
+        console.log('Orders successfully deleted');
+        // optionally refresh UI here
+      },
+      error: (err) => {
+        console.error('Failed to delete orders:', err.message);
+      },
+    });
   }
 }

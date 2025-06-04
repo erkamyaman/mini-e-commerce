@@ -11,10 +11,11 @@ import { OrdersService } from '../../../pages/orders/orders.service';
 import { Status, StatusLabels } from '../../../core/types/status.enum';
 import { AuthService } from '../../../core/service/auth.service';
 import { User } from '../../../core/types/user.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-table',
-  imports: [TableModule, DropdownModule, SplitButtonModule, FormsModule, ButtonModule],
+  imports: [TableModule, DropdownModule, SplitButtonModule, FormsModule, ButtonModule, DatePipe],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -35,8 +36,7 @@ export class TableComponent implements OnInit {
   statusLabels: any = StatusLabels;
 
   ngOnInit(): void {
-    console.log(this.data)
-    this.data.forEach(element => {
+    this.data?.forEach(element => {
       this.userService.getUserById(element.userId).subscribe(user => {
         element.customerName = user.name;
       });
@@ -65,9 +65,7 @@ export class TableComponent implements OnInit {
   }
 
   changeOrderStatus(id: string, status: string, user: User) {
-    this.orderService.changeOrderStatus(id, status, user).subscribe(() => {
-      console.log(`Order ${id} status changed to ${status}`);
-    });
+    this.orderService.changeOrderStatus(id, status, user).subscribe()
   }
 
   confirmOperation(operationType: 'accept' | 'reject' | 'delete' | 'forward', status: string, row: any) {
@@ -87,7 +85,6 @@ export class TableComponent implements OnInit {
     //     operationFunction = () => { };
     //     break;
     // } .  
-    console.log(status)
     this.confirmationService.confirm({
       message: `Are you sure you want to ${operationType} this order${operationType === "forward" ? " to the Sales" : ""}?`,
       header: `Confirm ${operationType.charAt(0).toUpperCase() + operationType.slice(1)}`,
@@ -108,8 +105,6 @@ export class TableComponent implements OnInit {
   }
 
   onShopChange(row: any) {
-    this.orderService.addShopToOrderById(row.id, row.shopId).subscribe(() => {
-      console.log(this.orderService.orders.getValue())
-    });
+    this.orderService.addShopToOrderById(row.id, row.shopId).subscribe();
   }
 }
