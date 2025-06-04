@@ -82,35 +82,7 @@ export class OrdersService {
       .patch<Order>(`http://localhost:3000/orders/${id}`, { status, salesman: user })
       .pipe(
         tap((updatedOrder) => {
-
-
-          const currentOrders = this.orders.value;
-          if (!currentOrders) return;
-
-          const updatedOrders = currentOrders.map(order =>
-            order.id === updatedOrder.id
-              ? updatedOrder
-              : order
-          );
-
-          const filteredOrders = updatedOrders.filter(order => order.status !== StatusLabels.accepted && order.status !== StatusLabels.wfa);
-          this.orders.next(filteredOrders);
-
-          const currentAcceptedOrders = this.acceptedOrders.value ?? [];
-          let updatedAcceptedOrders = currentAcceptedOrders.map(order =>
-            order.id === updatedOrder.id ? updatedOrder : order
-          );
-
-          if (
-            (updatedOrder.status === StatusLabels.accepted || updatedOrder.status === StatusLabels.wfa) &&
-            !updatedAcceptedOrders.some(order => order.id === updatedOrder.id)
-          ) {
-            updatedAcceptedOrders = [...updatedAcceptedOrders, updatedOrder];
-          }
-
-
-          this.acceptedOrders.next(updatedAcceptedOrders);
-
+          this.handleStatusChanges(updatedOrder)
         }),
         catchError((err: any) => {
           console.error('Error updating order', err);
@@ -119,6 +91,74 @@ export class OrdersService {
       );
   }
 
+  handleStatusChanges(updatedOrder: Order) {
+    const currentOrders = this.orders.value || [];
+    const currentForwardedOrders = this.acceptedOrders.value || [];
+
+    const isNowForwarded = updatedOrder.status === StatusLabels.wfa;
+    const wasInOrders = currentOrders.some(o => o.id === updatedOrder.id);
+    const wasInForwarded = currentForwardedOrders.some(o => o.id === updatedOrder.id);
+
+
+    if (wasInOrders) {
+      if (!isNowForwarded) {
+        const updatedOrders = currentOrders.map(order =>
+          order.id === updatedOrder.id
+            ? { ...order, ...updatedOrder }
+            : order
+        );
+        this.orders.next(updatedOrders);
+      } else {
+        const updatedOrders = currentOrders.filter(order => order.id !== updatedOrder.id);
+        this.orders.next(updatedOrders);
+
+        const updatedAcceptedOrders = [...currentForwardedOrders, updatedOrder];
+        this.acceptedOrders.next(updatedAcceptedOrders);
+      }
+    }
+
+    if (wasInForwarded) {
+      const updatedAcceptedOrders = currentForwardedOrders.map(order =>
+        order.id === updatedOrder.id
+          ? { ...order, ...updatedOrder }
+          : order
+      );
+      this.acceptedOrders.next(updatedAcceptedOrders);
+    }
+
+
+
+
+
+
+    // if (!currentOrders) return;
+
+    // const updatedOrders = currentOrders.map(order =>
+    //   order.id === updatedOrder.id
+    //     ? updatedOrder
+    //     : order
+    // );
+
+
+
+    // const filteredOrders = updatedOrders.filter(order => order.status !== StatusLabels.accepted && order.status !== StatusLabels.wfa);
+    // this.orders.next(filteredOrders);
+
+    // const currentAcceptedOrders = this.acceptedOrders.value ?? [];
+    // let updatedAcceptedOrders = currentAcceptedOrders.map(order =>
+    //   order.id === updatedOrder.id ? updatedOrder : order
+    // );
+
+    // if (
+    //   (updatedOrder.status === StatusLabels.accepted || updatedOrder.status === StatusLabels.wfa) &&
+    //   !updatedAcceptedOrders.some(order => order.id === updatedOrder.id)
+    // ) {
+    //   updatedAcceptedOrders = [...updatedAcceptedOrders, updatedOrder];
+    // }
+
+
+    // this.acceptedOrders.next(updatedAcceptedOrders);
+  }
   getSalesReport(): Observable<SalesReport> {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
       map((orders: Order[]) => {
