@@ -36,27 +36,34 @@ export class AuthService {
           this.localStorageService.set('user', JSON.stringify(user));
           this.currentUserSubject.next(user);
 
-          const userRole = this.currentUserSubject.value?.role;
+          this.handleRedirection()
 
-          // handle redirection ()
-          switch (userRole) {
-            case 'manager':
-              this.router.navigate(['/sales']);
-              break;
-            case 'salesman':
-              this.router.navigate(['/orders']);
-              break;
-            case 'customer':
-              this.router.navigate(['/products']);
-              break;
-            default:
-              break;
-          }
         } else {
           throw new Error('Invalid credentials');
         }
       })
     );
+  }
+
+  handleRedirection() {
+    const userRole = this.currentUserSubject.value?.role;
+
+    switch (userRole) {
+      case 'manager':
+        this.router.navigate(['/sales']);
+        break;
+      case 'salesman':
+        this.router.navigate(['/orders']);
+        break;
+      case 'customer':
+        this.router.navigate(['/products']);
+        break;
+      case 'god':
+        this.router.navigate(['/products']);
+        break;
+      default:
+        break;
+    }
   }
 
   isLoggedIn(): boolean {

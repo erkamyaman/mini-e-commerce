@@ -1,6 +1,14 @@
 {
   "users": [
     {
+      "id": "100",
+      "username": "god",
+      "password": "god",
+      "role": "god",
+      "name": "god",
+      "surname": "God"
+    },
+    {
       "id": "101",
       "username": "1",
       "password": "1",
@@ -453,14 +461,14 @@
       "address": "3",
       "status": "Deleted",
       "totalAmount": 999.96,
-      "shopId": 0,
+      "shopId": "2",
       "salesman": {
-        "id": "101",
-        "username": "1",
-        "password": "1",
-        "role": "manager",
-        "name": "ErkamMNGR",
-        "surname": "Yaman"
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
       }
     },
     {
@@ -471,9 +479,57 @@
       "userId": "103",
       "date": "2025-06-02T18:10:29.987Z",
       "address": "2",
-      "status": "waiting",
+      "status": "Accepted",
       "totalAmount": 43.96,
-      "shopId": 0
+      "shopId": "2",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "bf00",
+      "productId": "L017",
+      "productName": "Shire Pint Glass",
+      "quantity": 2,
+      "userId": "103",
+      "date": "2025-06-04T17:29:36.644Z",
+      "address": "3",
+      "status": "Waiting for Approval",
+      "totalAmount": 26,
+      "shopId": "1",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "db5d",
+      "productId": "L002",
+      "productName": "Gandalf’s Staff",
+      "quantity": 2,
+      "userId": "100",
+      "date": "2025-06-04T17:43:26.451Z",
+      "address": "3",
+      "status": "Waiting for Approval",
+      "totalAmount": 399.98,
+      "shopId": "3",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
     }
   ],
   "shops": [

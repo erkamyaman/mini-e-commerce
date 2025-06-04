@@ -23,9 +23,9 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'products', pathMatch: 'full' },
-      { path: 'products', loadComponent: loadProducts, title: 'Products', data: { roles: ['customer'] } },
-      { path: 'orders', loadComponent: loadOrders, title: 'Orders', data: { roles: ['salesman', 'manager'] } },
-      { path: 'sales', loadComponent: loadSales, title: 'Sales', data: { roles: ['manager'] } }
+      { path: 'products', loadComponent: loadProducts, title: 'Products', data: { roles: ['customer', 'god'] } },
+      { path: 'orders', loadComponent: loadOrders, title: 'Orders', data: { roles: ['salesman', 'manager', 'god'] } },
+      { path: 'sales', loadComponent: loadSales, title: 'Sales', data: { roles: ['manager', 'god'] } }
     ]
   },
 
