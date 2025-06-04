@@ -28,9 +28,13 @@ export class OrdersComponent implements OnInit {
   orders: any[] = []
 
   ngOnInit() {
+    // Subscribe to orders observable for immediate updates
     this.ordersService.ordersObs$.subscribe((data) => {
       this.orders = data as Order[];
     });
+
+    // Initial load of orders data
+    this.ordersService.getOrders().subscribe();
   }
 
   cols = [

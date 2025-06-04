@@ -26,6 +26,9 @@ export class OrdersService {
   acceptedOrders = new BehaviorSubject<Order[] | null>(null);
   acceptedOrdersObs$ = this.acceptedOrders.asObservable();
 
+  salesReport = new BehaviorSubject<SalesReport | null>(null);
+  salesReportObs$ = this.salesReport.asObservable();
+
   getOrders(): Observable<Order[]> {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
       tap((res) => {
@@ -60,16 +63,8 @@ export class OrdersService {
       .patch<Order>(`http://localhost:3000/orders/${id}`, { shopId })
       .pipe(
         tap((updatedOrder) => {
-          const currentOrders = this.orders.value;
-          if (!currentOrders) return;
-
-          const updatedOrders = currentOrders.map(order =>
-            order.id === updatedOrder.id
-              ? updatedOrder
-              : order
-          );
-
-          this.orders.next(updatedOrders);
+          // Refresh all data to ensure immediate updates
+          this.refreshAllData();
         }),
         catchError((err: any) => {
           console.error('Error updating order', err);
@@ -83,22 +78,52 @@ export class OrdersService {
       .patch<Order>(`http://localhost:3000/orders/${id}`, { status, salesman: user })
       .pipe(
         tap((updatedOrder) => {
-          const currentOrders = this.orders.value;
-          if (!currentOrders) return;
-
-          const updatedOrders = currentOrders.map(order =>
-            order.id === updatedOrder.id
-              ? updatedOrder
-              : order
-          );
-
-          this.orders.next(updatedOrders);
+          // Refresh all data to ensure immediate updates
+          this.refreshAllData();
         }),
         catchError((err: any) => {
           console.error('Error updating order', err);
           return throwError(() => new Error(err));
         })
       );
+  }
+
+  private refreshAllData(): void {
+    // Refresh orders list
+    this.httpService.get<Order[]>('http://localhost:3000/orders').subscribe((allOrders) => {
+      // Update orders (pending orders)
+      const filteredOrders = allOrders.filter(order =>
+        order.status !== StatusLabels.accepted && order.status !== StatusLabels.wfa
+      );
+      this.orders.next(filteredOrders);
+
+      // Update accepted orders (for sales)
+      const acceptedOrders = allOrders.filter(order =>
+        order.status === StatusLabels.wfa || order.status === StatusLabels.accepted
+      );
+      this.acceptedOrders.next(acceptedOrders);
+
+      // Update sales report
+      this.updateSalesReport(allOrders);
+    });
+  }
+
+  private updateSalesReport(orders: Order[]): void {
+    const totalSales = orders.filter(o => o.status === StatusLabels.wfa || o.status === StatusLabels.accepted).length;
+    const totalOrders = orders.length - totalSales;
+    const deletedOrders = orders.filter(o => o.status === StatusLabels.deleted).length;
+    const approvedSales = orders.filter(o => o.status === StatusLabels.accepted);
+    const revenue = approvedSales.reduce((sum, o) => sum + o.totalAmount, 0);
+
+    const report: SalesReport = {
+      totalOrders,
+      totalSales,
+      deletedOrders,
+      approvedSales: approvedSales.length,
+      revenue
+    };
+
+    this.salesReport.next(report);
   }
 
   getSalesReport(): Observable<SalesReport> {
@@ -110,13 +135,17 @@ export class OrdersService {
         const approvedSales = orders.filter(o => o.status === StatusLabels.accepted);
         const revenue = approvedSales.reduce((sum, o) => sum + o.totalAmount, 0);
 
-        return {
+        const report: SalesReport = {
           totalOrders,
           totalSales,
           deletedOrders,
           approvedSales: approvedSales.length,
           revenue
         };
+
+        // Also update the BehaviorSubject
+        this.salesReport.next(report);
+        return report;
       })
     );
   }

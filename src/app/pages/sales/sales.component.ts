@@ -24,16 +24,27 @@ export class SalesComponent {
 
   data: any;
   options: any;
+
   ngOnInit() {
+    // Subscribe to accepted orders for immediate updates
     this.ordersService.acceptedOrdersObs$.subscribe((data) => {
       this.orders = data as Order[];
     });
 
-    this.ordersService.getSalesReport().subscribe((data) => {
-      this.report = data
-      this.initChart()
-    })
+    // Subscribe to sales report for immediate updates
+    this.ordersService.salesReportObs$.subscribe((data) => {
+      if (data) {
+        this.report = data;
+        this.initChart();
+      }
+    });
 
+    // Initial load of accepted orders and sales report
+    this.ordersService.getAcceptedOrders().subscribe();
+    this.ordersService.getSalesReport().subscribe((data) => {
+      this.report = data;
+      this.initChart();
+    });
   }
 
   cols = [

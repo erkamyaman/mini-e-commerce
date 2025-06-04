@@ -25,6 +25,7 @@ export class TableComponent implements OnInit {
   public confirmationService = inject(ConfirmationService)
   public orderService = inject(OrdersService)
 
+
   @Input() cols: Array<{ field: string; header: string }> = [];
   @Input() data: any[] = [];
   @Input() isFromSales: boolean = false;
@@ -44,6 +45,19 @@ export class TableComponent implements OnInit {
     this.shopService.getShops().subscribe((res) => {
       this.shops = res as any[];
     })
+
+    // if (this.isFromSales) {
+    //   this.orderService.getAcceptedOrders().subscribe((res) => {
+    //     this.data = res
+    //   });
+    // } else {
+    //   this.orderService.getOrders().subscribe((res) => {
+    //     this.data = res
+    //   });
+    // }
+
+
+
   }
 
   getFieldValue(row: any, field: string): any {
