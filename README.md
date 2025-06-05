@@ -9,7 +9,11 @@
   <li>Rich UI with PrimeNG</li>
   <li>Mock backend with JSON Server</li>
   <li>State management using Angular services and BehaviorSubject</li>
+  <li>Routing with Angular Router</li>
+  <li>Authentication guard for protected routes</li>
+  <li>Role-based access control (e.g., Admin, Logged-in users)</li>
 </ul>
+
 
 <h2>🛠️ Tech Stack</h2>
 <ul>
@@ -43,17 +47,38 @@ npm install
 </code></pre>
 
 <h2>📁 Project Structure</h2>
+
 <pre><code>mini-e-commerce/
+├── .vscode/                 # VS Code editor settings
+├── public/                  # Static assets
 ├── src/
-│   ├── app/               # Angular components and modules
-│   ├── assets/            # Static files
-│   └── environments/      # Angular environments
-├── db.json                # Mock backend
-├── angular.json           # Angular CLI config
-├── package.json           # NPM config
-├── tailwind.config.js     # Tailwind config
-└── tsconfig.json          # TypeScript config
+│   ├── app/
+│   │   ├── core/            # Singleton services and interceptors
+│   │   │   ├── guard/       # Route guards (auth, role-based)
+│   │   │   ├── service/     # Core/global services (auth, user, etc.)
+│   │   │   ├── types/       # Global TypeScript interfaces/types
+│   │   ├── layout/          # Layout components (header, footer, etc.)
+│   │   ├── pages/           # Page-level features (Home, Product, etc.)
+│   │   ├── shared/          # Reusable components, directives, pipes
+│   │   ├── app.routes.ts    # Central routing config
+│   │   ├── app.component.ts/html/css
+│   │   ├── app.service.ts   # App-level logic
+│   │   └── app.config.ts    # Global app config
+│   ├── assets/              # Images, icons, etc.
+│   ├── environments/        # Environment files (dev, prod)
+│   ├── main.ts              # App entry point
+│   └── index.html           # Base HTML template
+├── db.json                  # JSON Server mock API
+├── primeNG.config.ts        # PrimeNG setup and themes
+├── tailwind.config.js       # Tailwind CSS config
+├── angular.json             # Angular workspace config
+├── package.json             # Project dependencies
+├── .editorconfig            # Coding style config
+├── .prettierrc.json         # Prettier formatting rules
+├── tsconfig.app.json        # TypeScript config
+├── README.md                # Project documentation
 </code></pre>
+
 
 <h2>🤝 Contributing</h2>
 <p>Contributions are welcome! Please open an issue or pull request for enhancements or bug fixes.</p>
