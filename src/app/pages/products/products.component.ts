@@ -9,7 +9,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MessageService } from 'primeng/api';
 import { OrderPayload } from './models/createOrder.dto';
 import { AuthService } from '../../core/service/auth.service';
-import { OrdersService } from '../orders/orders.service';
 
 @Component({
   selector: 'app-products',
@@ -21,12 +20,12 @@ export class ProductsComponent implements OnInit {
   productService = inject(ProductService);
   messageService = inject(MessageService);
   authService = inject(AuthService)
-  ordersService = inject(OrdersService)
 
   displayProductDialog = false;
   products: Product[] = [];
   productAddForm!: FormGroup;
   chosenProduct!: Product;
+  currentUserRole: string | null = null;
 
   constructor(public fb: FormBuilder) {
     this.productAddForm = this.fb.group({
@@ -35,6 +34,7 @@ export class ProductsComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.currentUserRole = this.authService.getCurrentUser()?.role ?? null;
     this.productService.productsObs$.subscribe((data) => {
       this.products = data as Product[];
     });
@@ -97,15 +97,5 @@ export class ProductsComponent implements OnInit {
     return 0;
   }
 
-  deleteAllOrders() {
-    this.ordersService.deleteAllOrders().subscribe({
-      next: () => {
-        console.log('Orders successfully deleted');
-        // optionally refresh UI here
-      },
-      error: (err) => {
-        console.error('Failed to delete orders:', err.message);
-      },
-    });
-  }
+
 }
