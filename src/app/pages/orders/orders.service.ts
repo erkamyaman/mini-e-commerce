@@ -99,6 +99,7 @@ export class OrdersService {
     const currentForwardedOrders = this.acceptedOrders.value || [];
 
     const isNowForwarded = updatedOrder.status === StatusLabels.wfa;
+    const isNowRejected = updatedOrder.status === StatusLabels.rejected;
     const wasInOrders = currentOrders.some(o => o.id === updatedOrder.id);
     const wasInForwarded = currentForwardedOrders.some(o => o.id === updatedOrder.id);
 
@@ -121,12 +122,21 @@ export class OrdersService {
     }
 
     if (wasInForwarded) {
-      const updatedAcceptedOrders = currentForwardedOrders.map(order =>
-        order.id === updatedOrder.id
-          ? { ...order, ...updatedOrder }
-          : order
-      );
-      this.acceptedOrders.next(updatedAcceptedOrders);
+      if (isNowRejected) {
+        const updatedAcceptedOrders = currentOrders.filter(order => order.id !== updatedOrder.id);
+        this.acceptedOrders.next(updatedAcceptedOrders);
+
+        const updatedOrders = [...currentOrders, updatedOrder];
+        this.orders.next(updatedOrders);
+      } else {
+        const updatedAcceptedOrders = currentForwardedOrders.map(order =>
+          order.id === updatedOrder.id
+            ? { ...order, ...updatedOrder }
+            : order
+        );
+        this.acceptedOrders.next(updatedAcceptedOrders);
+      }
+
     }
 
     this.refreshSalesReport();
