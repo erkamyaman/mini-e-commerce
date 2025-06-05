@@ -189,6 +189,7 @@ export class OrdersService {
       tap(() => {
         this.orders.next(null);
         this.acceptedOrders.next(null);
+        this.refreshSalesReport();
       }),
       catchError((err) => {
         console.error('Error deleting orders:', err);
