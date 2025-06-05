@@ -399,7 +399,7 @@
       "userId": "100",
       "date": "2025-06-05T01:08:48.690Z",
       "address": "1",
-      "status": "Waiting for Approval",
+      "status": "Accepted",
       "totalAmount": 129.99,
       "shopId": "2",
       "salesman": {
@@ -419,9 +419,37 @@
       "userId": "100",
       "date": "2025-06-05T01:10:04.460Z",
       "address": "1",
-      "status": "waiting",
+      "status": "Rejected",
       "totalAmount": 129.99,
-      "shopId": 0
+      "shopId": "1",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "a2e7",
+      "productId": "L002",
+      "productName": "Gandalf’s Staff",
+      "quantity": 1,
+      "userId": "100",
+      "date": "2025-06-05T01:23:42.211Z",
+      "address": "1",
+      "status": "Deleted",
+      "totalAmount": 199.99,
+      "shopId": 0,
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
     }
   ],
   "shops": [

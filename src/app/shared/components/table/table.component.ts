@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../core/service/user.service';
 import { ButtonModule } from 'primeng/button';
 import { ShopService } from '../../../core/service/shop.service';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { OrdersService } from '../../../pages/orders/orders.service';
 import { Status, StatusLabels } from '../../../core/types/status.enum';
 import { AuthService } from '../../../core/service/auth.service';
@@ -28,6 +28,7 @@ export class TableComponent implements OnInit {
   public shopService = inject(ShopService)
   public confirmationService = inject(ConfirmationService)
   public orderService = inject(OrdersService)
+  public messageService = inject(MessageService);
 
   @ViewChild('filter') filter!: ElementRef;
 
@@ -69,7 +70,14 @@ export class TableComponent implements OnInit {
   }
 
   changeOrderStatus(id: string, status: string, user: User) {
-    this.orderService.changeOrderStatus(id, status, user).subscribe()
+    this.orderService.changeOrderStatus(id, status, user).subscribe({
+      next: (res) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: `Product status changed to ${status} successfully` });
+      },
+      error: (err) => {
+        console.error('Failed to change order status:', err);
+      }
+    });
   }
 
   confirmOperation(operationType: 'accept' | 'reject' | 'delete' | 'forward', status: string, row: any) {
