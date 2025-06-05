@@ -1,6 +1,6 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../core/service/user.service';
@@ -12,10 +12,13 @@ import { Status, StatusLabels } from '../../../core/types/status.enum';
 import { AuthService } from '../../../core/service/auth.service';
 import { User } from '../../../core/types/user.model';
 import { DatePipe } from '@angular/common';
+import { InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 
 @Component({
   selector: 'app-table',
-  imports: [TableModule, DropdownModule, SplitButtonModule, FormsModule, ButtonModule, DatePipe],
+  imports: [TableModule, DropdownModule, SplitButtonModule, FormsModule, ButtonModule, IconFieldModule, InputIconModule, DatePipe, InputTextModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -26,6 +29,7 @@ export class TableComponent implements OnInit {
   public confirmationService = inject(ConfirmationService)
   public orderService = inject(OrdersService)
 
+  @ViewChild('filter') filter!: ElementRef;
 
   @Input() cols: Array<{ field: string; header: string }> = [];
   @Input() data: any[] = [];
@@ -106,5 +110,14 @@ export class TableComponent implements OnInit {
 
   onShopChange(row: any) {
     this.orderService.addShopToOrderById(row.id, row.shopId).subscribe();
+  }
+
+  onGlobalFilter(table: Table, event: Event) {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
+
+  clear(table: Table) {
+    table.clear();
+    this.filter.nativeElement.value = '';
   }
 }
