@@ -1,59 +1,133 @@
-# MiniECommerce
+<h1>🛒 Mini E-Commerce</h1>
+<p>A lightweight e-commerce web application built with Angular, Tailwind CSS, PrimeNG, and JSON Server. It demonstrates state management with RxJS and BehaviorSubject.</p>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+<h2>🚀 Features</h2>
+<ul>
+  <li>Product listing and browsing</li>
+  <li>Shopping cart functionality</li>
+  <li>Responsive design with Tailwind CSS</li>
+  <li>Rich UI with PrimeNG</li>
+  <li>Mock backend with JSON Server</li>
+  <li>State management using Angular services and BehaviorSubject</li>
+</ul>
 
-## Development server
+<h2>🛠️ Tech Stack</h2>
+<ul>
+  <li><strong>Angular</strong> 19.2.7</li>
+  <li><strong>Tailwind CSS</strong> for utility-first styling</li>
+  <li><strong>PrimeNG</strong> for ready-made UI components</li>
+  <li><strong>RxJS</strong> with <code>BehaviorSubject</code> for reactive state</li>
+  <li><strong>JSON Server</strong> to simulate a RESTful backend</li>
+</ul>
 
-To start a local development server, run:
+<h2>📦 Installation</h2>
+<pre><code>git clone https://github.com/yamanerkam/mini-e-commerce.git
+cd mini-e-commerce
+npm install
+</code></pre>
 
-```bash
-ng serve
-```
+<h2>🧑‍💻 Development</h2>
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+<h3>Start Angular server</h3>
+<pre><code>ng serve
+</code></pre>
+<p>Visit: <code>http://localhost:4200</code></p>
 
-## Code scaffolding
+<h3>Start JSON server</h3>
+<pre><code>npx json-server --watch db.json
+</code></pre>
+<p>JSON server will run on <code>http://localhost:3000</code></p>
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+<p><em>If you prefer global install:</em></p>
+<pre><code>npm install -g json-server
+</code></pre>
 
-```bash
-ng generate component component-name
-```
+<h2>🎨 Tailwind CSS</h2>
+<p>Tailwind is used for all layout and styling. You can use utility classes like:</p>
+<pre><code>&lt;button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"&gt;
+  Hover me
+&lt;/button&gt;
+</code></pre>
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+<h2>💎 PrimeNG</h2>
+<p>PrimeNG is used for components like buttons, tables, and inputs.</p>
 
-```bash
-ng generate --help
-```
+<p><strong>Install:</strong></p>
+<pre><code>npm install primeng primeicons
+</code></pre>
 
-## Building
+<p><strong>Import styles:</strong></p>
+<pre><code>@import 'primeng/resources/themes/lara-light-blue/theme.css';
+@import 'primeng/resources/primeng.css';
+@import 'primeicons/primeicons.css';
+</code></pre>
 
-To build the project run:
+<p><strong>Use components:</strong></p>
+<pre><code>&lt;p-button label="Click Me"&gt;&lt;/p-button&gt;
+</code></pre>
 
-```bash
-ng build
-```
+<h2>🔄 State Management with BehaviorSubject</h2>
+<p>We use <code>BehaviorSubject</code> to manage shared state, like the shopping cart.</p>
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+<pre><code>import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
-## Running unit tests
+@Injectable({ providedIn: 'root' })
+export class CartService {
+  private cartItemsSubject = new BehaviorSubject&lt;CartItem[]&gt;([]);
+  cartItems$ = this.cartItemsSubject.asObservable();
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+  addToCart(item: CartItem) {
+    const current = this.cartItemsSubject.getValue();
+    this.cartItemsSubject.next([...current, item]);
+  }
 
-```bash
-ng test
-```
+  removeFromCart(id: number) {
+    const filtered = this.cartItemsSubject.getValue().filter(i =&gt; i.id !== id);
+    this.cartItemsSubject.next(filtered);
+  }
+}
+</code></pre>
 
-## Running end-to-end tests
+<h2>⚙️ Angular CLI Commands</h2>
+<p><strong>Generate a new component:</strong></p>
+<pre><code>ng generate component component-name
+</code></pre>
 
-For end-to-end (e2e) testing, run:
+<p><strong>For a complete list of available schematics (such as <code>components</code>, <code>directives</code>, or <code>pipes</code>):</strong></p>
+<pre><code>ng generate --help
+</code></pre>
 
-```bash
-ng e2e
-```
+<h2>🏗️ Building</h2>
+<p>To build the project run:</p>
+<pre><code>ng build
+</code></pre>
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+<h2>🧪 Running Tests</h2>
+<p><strong>Unit tests:</strong></p>
+<pre><code>ng test
+</code></pre>
 
-## Additional Resources
+<p><strong>E2E tests:</strong></p>
+<pre><code>ng e2e
+</code></pre>
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+<h2>📁 Project Structure</h2>
+<pre><code>mini-e-commerce/
+├── src/
+│   ├── app/               # Angular components and modules
+│   ├── assets/            # Static files
+│   └── environments/      # Angular environments
+├── db.json                # Mock backend
+├── angular.json           # Angular CLI config
+├── package.json           # NPM config
+├── tailwind.config.js     # Tailwind config
+└── tsconfig.json          # TypeScript config
+</code></pre>
+
+<h2>🤝 Contributing</h2>
+<p>Contributions are welcome! Please open an issue or pull request for enhancements or bug fixes.</p>
+
+<h2>📄 License</h2>
+<p>This project is licensed under the MIT License.</p>
+
