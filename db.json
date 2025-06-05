@@ -390,7 +390,40 @@
       "price": 135.99
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "id": "728a",
+      "productId": "L001",
+      "productName": "The One Ring Replica",
+      "quantity": 1,
+      "userId": "100",
+      "date": "2025-06-05T01:08:48.690Z",
+      "address": "1",
+      "status": "Waiting for Approval",
+      "totalAmount": 129.99,
+      "shopId": "2",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "b070",
+      "productId": "L001",
+      "productName": "The One Ring Replica",
+      "quantity": 1,
+      "userId": "100",
+      "date": "2025-06-05T01:10:04.460Z",
+      "address": "1",
+      "status": "waiting",
+      "totalAmount": 129.99,
+      "shopId": 0
+    }
+  ],
   "shops": [
     {
       "name": "Mordor Shop",
