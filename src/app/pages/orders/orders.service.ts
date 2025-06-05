@@ -123,7 +123,8 @@ export class OrdersService {
 
     if (wasInForwarded) {
       if (isNowRejected) {
-        const updatedAcceptedOrders = currentOrders.filter(order => order.id !== updatedOrder.id);
+        const updatedAcceptedOrders = currentForwardedOrders.filter(order => order.id !== updatedOrder.id);
+        console.log(updatedAcceptedOrders)
         this.acceptedOrders.next(updatedAcceptedOrders);
 
         const updatedOrders = [...currentOrders, updatedOrder];
