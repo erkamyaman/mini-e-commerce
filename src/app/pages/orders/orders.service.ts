@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, forkJoin, map, Observable, switchMap, tap, throwError } from 'rxjs';
 import { Order } from './orders.component';
 import { User } from '../../core/types/user.model';
 import { StatusLabels } from '../../core/types/status.enum';
@@ -26,8 +26,8 @@ export class OrdersService {
   acceptedOrders = new BehaviorSubject<Order[] | null>(null);
   acceptedOrdersObs$ = this.acceptedOrders.asObservable();
 
-  salesReport = new BehaviorSubject<SalesReport | null>(null);
-  salesReportObs$ = this.salesReport.asObservable();
+  reportData = new BehaviorSubject<SalesReport | null>(null);
+  reportDataObs = this.reportData.asObservable();
 
   getOrders(): Observable<Order[]> {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
@@ -62,7 +62,16 @@ export class OrdersService {
       .patch<Order>(`http://localhost:3000/orders/${id}`, { shopId })
       .pipe(
         tap((updatedOrder) => {
-          this.updateOrderInStream(updatedOrder);
+          const currentOrders = this.orders.value;
+          if (!currentOrders) return;
+
+          const updatedOrders = currentOrders.map(order =>
+            order.id === updatedOrder.id
+              ? updatedOrder
+              : order
+          );
+
+          this.orders.next(updatedOrders);
         }),
         catchError((err: any) => {
           console.error('Error updating order', err);
@@ -76,8 +85,7 @@ export class OrdersService {
       .patch<Order>(`http://localhost:3000/orders/${id}`, { status, salesman: user })
       .pipe(
         tap((updatedOrder) => {
-          this.handleStatusChange(updatedOrder);
-          this.recalculateSalesReport();
+          this.handleStatusChanges(updatedOrder)
         }),
         catchError((err: any) => {
           console.error('Error updating order', err);
@@ -86,88 +94,55 @@ export class OrdersService {
       );
   }
 
-  private updateOrderInStream(updatedOrder: Order): void {
-    const isAcceptedOrder = updatedOrder.status === StatusLabels.wfa || updatedOrder.status === StatusLabels.accepted;
-
-    if (isAcceptedOrder) {
-      const currentAccepted = this.acceptedOrders.value || [];
-      const updatedAccepted = currentAccepted.map(order =>
-        order.id === updatedOrder.id ? updatedOrder : order
-      );
-      this.acceptedOrders.next(updatedAccepted);
-    } else {
-      const currentOrders = this.orders.value || [];
-      const updatedOrders = currentOrders.map(order =>
-        order.id === updatedOrder.id ? updatedOrder : order
-      );
-      this.orders.next(updatedOrders);
-    }
-  }
-
-  private handleStatusChange(updatedOrder: Order): void {
+  handleStatusChanges(updatedOrder: Order) {
     const currentOrders = this.orders.value || [];
-    const currentAccepted = this.acceptedOrders.value || [];
+    const currentForwardedOrders = this.acceptedOrders.value || [];
 
-    const isNowAccepted = updatedOrder.status === StatusLabels.wfa || updatedOrder.status === StatusLabels.accepted;
-    const wasInOrders = currentOrders.find(o => o.id === updatedOrder.id);
-    const wasInAccepted = currentAccepted.find(o => o.id === updatedOrder.id);
+    const isNowForwarded = updatedOrder.status === StatusLabels.wfa;
+    const isNowRejected = updatedOrder.status === StatusLabels.rejected;
+    const wasInOrders = currentOrders.some(o => o.id === updatedOrder.id);
+    const wasInForwarded = currentForwardedOrders.some(o => o.id === updatedOrder.id);
 
-    if (isNowAccepted) {
-      if (wasInOrders) {
-        const newOrders = currentOrders.filter(o => o.id !== updatedOrder.id);
-        const newAccepted = [...currentAccepted, updatedOrder];
 
-        this.orders.next(newOrders);
-        this.acceptedOrders.next(newAccepted);
-      } else if (wasInAccepted) {
-        const newAccepted = currentAccepted.map(o =>
-          o.id === updatedOrder.id ? updatedOrder : o
+    if (wasInOrders) {
+      if (!isNowForwarded) {
+        const updatedOrders = currentOrders.map(order =>
+          order.id === updatedOrder.id
+            ? { ...order, ...updatedOrder }
+            : order
         );
-        this.acceptedOrders.next(newAccepted);
-      }
-    } else {
-      if (wasInAccepted) {
-        const newAccepted = currentAccepted.filter(o => o.id !== updatedOrder.id);
-        this.acceptedOrders.next(newAccepted);
+        this.orders.next(updatedOrders);
+      } else {
+        const updatedOrders = currentOrders.filter(order => order.id !== updatedOrder.id);
+        this.orders.next(updatedOrders);
 
-        if (updatedOrder.status !== StatusLabels.deleted) {
-          const newOrders = [...currentOrders, updatedOrder];
-          this.orders.next(newOrders);
-        }
-      } else if (wasInOrders) {
-        if (updatedOrder.status === StatusLabels.deleted) {
-          const newOrders = currentOrders.filter(o => o.id !== updatedOrder.id);
-          this.orders.next(newOrders);
-        } else {
-          const newOrders = currentOrders.map(o =>
-            o.id === updatedOrder.id ? updatedOrder : o
-          );
-          this.orders.next(newOrders);
-        }
+        const updatedAcceptedOrders = [...currentForwardedOrders, updatedOrder];
+        this.acceptedOrders.next(updatedAcceptedOrders);
       }
     }
+
+    if (wasInForwarded) {
+      if (isNowRejected) {
+        const updatedAcceptedOrders = currentOrders.filter(order => order.id !== updatedOrder.id);
+        this.acceptedOrders.next(updatedAcceptedOrders);
+
+        const updatedOrders = [...currentOrders, updatedOrder];
+        this.orders.next(updatedOrders);
+      } else {
+        const updatedAcceptedOrders = currentForwardedOrders.map(order =>
+          order.id === updatedOrder.id
+            ? { ...order, ...updatedOrder }
+            : order
+        );
+        this.acceptedOrders.next(updatedAcceptedOrders);
+      }
+
+    }
+
+    this.refreshSalesReport();
   }
 
-  private recalculateSalesReport(): void {
-    const allOrders = [...(this.orders.value || []), ...(this.acceptedOrders.value || [])];
-    const totalSales = (this.acceptedOrders.value || []).length;
-    const totalOrders = (this.orders.value || []).length;
-    const deletedOrders = 0;
-    const approvedSales = (this.acceptedOrders.value || []).filter(o => o.status === StatusLabels.accepted);
-    const revenue = approvedSales.reduce((sum, o) => sum + o.totalAmount, 0);
-
-    const report: SalesReport = {
-      totalOrders,
-      totalSales,
-      deletedOrders,
-      approvedSales: approvedSales.length,
-      revenue
-    };
-
-    this.salesReport.next(report);
-  }
-
-  getSalesReport(): Observable<SalesReport> {
+  getSalesReport() {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
       map((orders: Order[]) => {
         const totalSales = orders.filter(o => o.status === StatusLabels.wfa || o.status === StatusLabels.accepted).length;
@@ -184,8 +159,51 @@ export class OrdersService {
           revenue
         };
 
-        this.salesReport.next(report);
-        return report;
+        this.reportData.next(report)
+      })
+    );
+  }
+
+  refreshSalesReport() {
+    const currentOrders = this.orders.value || [];
+    const currentForwardedOrders = this.acceptedOrders.value || [];
+
+    const totalSales = currentForwardedOrders.length;
+    const totalOrders = currentOrders.length;
+    const deletedOrders = currentOrders.filter(o => o.status === StatusLabels.deleted).length;
+    const approvedSales = currentForwardedOrders.filter(o => o.status === StatusLabels.accepted);
+    const revenue = approvedSales.reduce((sum, o) => sum + o.totalAmount, 0);
+
+    const report: SalesReport = {
+      totalOrders,
+      totalSales,
+      deletedOrders,
+      approvedSales: approvedSales.length,
+      revenue
+    };
+
+    this.reportData.next(report)
+  }
+
+
+  deleteAllOrders(): Observable<void> {
+    return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
+      switchMap((orders) => {
+        const deleteRequests = orders.map(order =>
+          this.httpService.delete(`http://localhost:3000/orders/${order.id}`)
+        );
+        return forkJoin(deleteRequests).pipe(
+          map(() => void 0)
+        );
+      }),
+      tap(() => {
+        this.orders.next(null);
+        this.acceptedOrders.next(null);
+        this.refreshSalesReport();
+      }),
+      catchError((err) => {
+        console.error('Error deleting orders:', err);
+        return throwError(() => new Error(err?.message || 'Unknown error'));
       })
     );
   }

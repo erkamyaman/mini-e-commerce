@@ -21,6 +21,8 @@
       <div class="flex flex-col gap-1">
         <span class="text-sm font-semibold text-gray-700">Total Amount: ${{ totalAmount() }}</span>
       </div>
+      } @if(currentUserRole==='god'){
+      <button (click)="addProductQuick()" class="w-full p-2 bg-amber-600 hover:bg-green-500 rounded-md text-white disabled:text-gray-800 disabled:bg-gray-400" type="submit" label="Order">Order Quick</button>
       }
 
       <button class="w-full p-2 bg-amber-600 hover:bg-green-500 rounded-md text-white disabled:text-gray-800 disabled:bg-gray-400" type="submit" label="Order" [disabled]="productAddForm.invalid || chosenProduct.stock < productAddForm.getRawValue().quantity">Order</button>

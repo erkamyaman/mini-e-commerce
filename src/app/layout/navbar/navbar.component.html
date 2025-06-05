@@ -5,6 +5,9 @@
     </div>
 
     <div class="end-wrapper">
+      @if(currentUser?.role ==='god'){
+      <p-button (onClick)="deleteAllOrdersAndSales()" icon="pi pi-trash" label="Delete All Sales And Orders" />
+      }
       <a routerLink="/products" routerLinkActive="active-tab">Products</a>
       <a routerLink="/orders" routerLinkActive="active-tab">Orders</a>
       <a routerLink="/sales" routerLinkActive="active-tab">Sales</a>

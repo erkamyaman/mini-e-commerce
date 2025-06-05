@@ -6,6 +6,7 @@ import { Menu } from 'primeng/menu';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AppService } from '../../app.service';
 import { AuthService } from '../../core/service/auth.service';
+import { OrdersService } from '../../pages/orders/orders.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +16,8 @@ import { AuthService } from '../../core/service/auth.service';
 })
 export class NavbarComponent implements OnInit {
   authService = inject(AuthService)
+  ordersService = inject(OrdersService)
+
   currentUser = this.authService.getCurrentUser()
   items: MenuItem[] | undefined;
 
@@ -46,5 +49,15 @@ export class NavbarComponent implements OnInit {
     this.authService.logout()
   }
 
+  deleteAllOrdersAndSales() {
+    this.ordersService.deleteAllOrders().subscribe({
+      next: () => {
+        console.log('Orders and sales successfully deleted');
+      },
+      error: (err) => {
+        console.error('Failed to delete orders:', err.message);
+      },
+    });
+  }
 
 }

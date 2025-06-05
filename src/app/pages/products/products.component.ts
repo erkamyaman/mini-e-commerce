@@ -25,6 +25,7 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
   productAddForm!: FormGroup;
   chosenProduct!: Product;
+  currentUserRole: string | null = null;
 
   constructor(public fb: FormBuilder) {
     this.productAddForm = this.fb.group({
@@ -33,6 +34,7 @@ export class ProductsComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.currentUserRole = this.authService.getCurrentUser()?.role ?? null;
     this.productService.productsObs$.subscribe((data) => {
       this.products = data as Product[];
     });
@@ -64,6 +66,21 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  addProductQuick() {
+    this.productAddForm.get('address')?.setValue('1')
+    this.productAddForm.get('quantity')?.setValue(1)
+    const orderPayload: OrderPayload = new OrderPayload(this.chosenProduct, this.productAddForm.getRawValue(), this.authService.getCurrentUserId())
+    this.productService.addProductToSales(orderPayload).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully' });
+        this.closeDialog();
+      },
+      error: (err) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to add product' });
+      }
+    });
+  }
+
   totalAmount() {
     const chosenProduct = this.productService.chosenProduct.getValue();
     if (chosenProduct) {
@@ -79,4 +96,6 @@ export class ProductsComponent implements OnInit {
     }
     return 0;
   }
+
+
 }

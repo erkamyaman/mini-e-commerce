@@ -31,8 +31,6 @@ export class OrdersComponent implements OnInit {
     this.ordersService.ordersObs$.subscribe((data) => {
       this.orders = data as Order[];
     });
-
-    this.ordersService.getOrders().subscribe();
   }
 
   cols = [
