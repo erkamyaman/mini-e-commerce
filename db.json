@@ -392,12 +392,12 @@
   ],
   "orders": [
     {
-      "id": "77bd",
+      "id": "704e",
       "productId": "L001",
       "productName": "The One Ring Replica",
       "quantity": 1,
       "userId": "100",
-      "date": "2025-06-04T22:00:09.701Z",
+      "date": "2025-06-05T00:02:20.191Z",
       "address": "1",
       "status": "Accepted",
       "totalAmount": 129.99,
@@ -412,12 +412,12 @@
       }
     },
     {
-      "id": "a1c1",
+      "id": "be76",
       "productId": "L004",
       "productName": "Sting Sword Replica",
       "quantity": 1,
       "userId": "100",
-      "date": "2025-06-04T22:00:12.264Z",
+      "date": "2025-06-05T00:02:22.125Z",
       "address": "1",
       "status": "Accepted",
       "totalAmount": 89.99,
@@ -432,16 +432,16 @@
       }
     },
     {
-      "id": "27cc",
+      "id": "3330",
       "productId": "L001",
       "productName": "The One Ring Replica",
       "quantity": 1,
       "userId": "100",
-      "date": "2025-06-04T22:01:48.114Z",
+      "date": "2025-06-05T00:03:41.795Z",
       "address": "1",
-      "status": "Accepted",
+      "status": "Deleted",
       "totalAmount": 129.99,
-      "shopId": "1",
+      "shopId": 0,
       "salesman": {
         "id": "100",
         "username": "god",
@@ -452,124 +452,28 @@
       }
     },
     {
-      "id": "764c",
+      "id": "9d53",
       "productId": "L001",
       "productName": "The One Ring Replica",
       "quantity": 1,
       "userId": "100",
-      "date": "2025-06-04T22:02:08.214Z",
+      "date": "2025-06-05T00:04:37.751Z",
       "address": "1",
-      "status": "Accepted",
+      "status": "waiting",
       "totalAmount": 129.99,
-      "shopId": "1",
-      "salesman": {
-        "id": "100",
-        "username": "god",
-        "password": "god",
-        "role": "god",
-        "name": "god",
-        "surname": "God"
-      }
+      "shopId": 0
     },
     {
-      "id": "ce41",
-      "productId": "L028",
-      "productName": "Fellowship Wall Art",
-      "quantity": 1,
-      "userId": "100",
-      "date": "2025-06-04T22:04:46.338Z",
-      "address": "1",
-      "status": "Accepted",
-      "totalAmount": 39.99,
-      "shopId": "2",
-      "salesman": {
-        "id": "100",
-        "username": "god",
-        "password": "god",
-        "role": "god",
-        "name": "god",
-        "surname": "God"
-      }
-    },
-    {
-      "id": "6064",
-      "productId": "L027",
-      "productName": "Mount Doom Diorama",
-      "quantity": 1,
-      "userId": "100",
-      "date": "2025-06-04T22:04:47.415Z",
-      "address": "1",
-      "status": "Waiting for Approval",
-      "totalAmount": 299,
-      "shopId": "1",
-      "salesman": {
-        "id": "100",
-        "username": "god",
-        "password": "god",
-        "role": "god",
-        "name": "god",
-        "surname": "God"
-      }
-    },
-    {
-      "id": "51df",
+      "id": "5ad6",
       "productId": "L002",
       "productName": "Gandalf’s Staff",
       "quantity": 1,
       "userId": "100",
-      "date": "2025-06-04T22:05:54.593Z",
+      "date": "2025-06-05T00:05:14.373Z",
       "address": "1",
-      "status": "Waiting for Approval",
+      "status": "waiting",
       "totalAmount": 199.99,
-      "shopId": "2",
-      "salesman": {
-        "id": "100",
-        "username": "god",
-        "password": "god",
-        "role": "god",
-        "name": "god",
-        "surname": "God"
-      }
-    },
-    {
-      "id": "f428",
-      "productId": "L002",
-      "productName": "Gandalf’s Staff",
-      "quantity": 1,
-      "userId": "100",
-      "date": "2025-06-04T22:06:51.060Z",
-      "address": "1",
-      "status": "Waiting for Approval",
-      "totalAmount": 199.99,
-      "shopId": "2",
-      "salesman": {
-        "id": "100",
-        "username": "god",
-        "password": "god",
-        "role": "god",
-        "name": "god",
-        "surname": "God"
-      }
-    },
-    {
-      "id": "011f",
-      "productId": "L008",
-      "productName": "Gollum Plush Toy",
-      "quantity": 1,
-      "userId": "100",
-      "date": "2025-06-04T22:06:52.973Z",
-      "address": "1",
-      "status": "Waiting for Approval",
-      "totalAmount": 19.99,
-      "shopId": "2",
-      "salesman": {
-        "id": "100",
-        "username": "god",
-        "password": "god",
-        "role": "god",
-        "name": "god",
-        "surname": "God"
-      }
+      "shopId": 0
     }
   ],
   "shops": [

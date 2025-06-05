@@ -30,7 +30,7 @@ export class SalesComponent {
       this.orders = data as Order[];
     });
 
-    this.ordersService.getSalesReport().subscribe((data) => {
+    this.ordersService.reportDataObs.subscribe((data) => {
       this.report = data
       this.initChart()
     })

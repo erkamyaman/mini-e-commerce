@@ -26,6 +26,9 @@ export class OrdersService {
   acceptedOrders = new BehaviorSubject<Order[] | null>(null);
   acceptedOrdersObs$ = this.acceptedOrders.asObservable();
 
+  reportData = new BehaviorSubject<SalesReport | null>(null);
+  reportDataObs = this.reportData.asObservable();
+
   getOrders(): Observable<Order[]> {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
       tap((res) => {
@@ -126,40 +129,10 @@ export class OrdersService {
       this.acceptedOrders.next(updatedAcceptedOrders);
     }
 
-
-
-
-
-
-    // if (!currentOrders) return;
-
-    // const updatedOrders = currentOrders.map(order =>
-    //   order.id === updatedOrder.id
-    //     ? updatedOrder
-    //     : order
-    // );
-
-
-
-    // const filteredOrders = updatedOrders.filter(order => order.status !== StatusLabels.accepted && order.status !== StatusLabels.wfa);
-    // this.orders.next(filteredOrders);
-
-    // const currentAcceptedOrders = this.acceptedOrders.value ?? [];
-    // let updatedAcceptedOrders = currentAcceptedOrders.map(order =>
-    //   order.id === updatedOrder.id ? updatedOrder : order
-    // );
-
-    // if (
-    //   (updatedOrder.status === StatusLabels.accepted || updatedOrder.status === StatusLabels.wfa) &&
-    //   !updatedAcceptedOrders.some(order => order.id === updatedOrder.id)
-    // ) {
-    //   updatedAcceptedOrders = [...updatedAcceptedOrders, updatedOrder];
-    // }
-
-
-    // this.acceptedOrders.next(updatedAcceptedOrders);
+    this.refreshSalesReport();
   }
-  getSalesReport(): Observable<SalesReport> {
+
+  getSalesReport() {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
       map((orders: Order[]) => {
         const totalSales = orders.filter(o => o.status === StatusLabels.wfa || o.status === StatusLabels.accepted).length;
@@ -176,10 +149,32 @@ export class OrdersService {
           revenue
         };
 
-        return report;
+        this.reportData.next(report)
       })
     );
   }
+
+  refreshSalesReport() {
+    const currentOrders = this.orders.value || [];
+    const currentForwardedOrders = this.acceptedOrders.value || [];
+
+    const totalSales = currentForwardedOrders.length;
+    const totalOrders = currentOrders.length;
+    const deletedOrders = currentOrders.filter(o => o.status === StatusLabels.deleted).length;
+    const approvedSales = currentForwardedOrders.filter(o => o.status === StatusLabels.accepted);
+    const revenue = approvedSales.reduce((sum, o) => sum + o.totalAmount, 0);
+
+    const report: SalesReport = {
+      totalOrders,
+      totalSales,
+      deletedOrders,
+      approvedSales: approvedSales.length,
+      revenue
+    };
+
+    this.reportData.next(report)
+  }
+
 
   deleteAllOrders(): Observable<void> {
     return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(

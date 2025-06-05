@@ -39,6 +39,7 @@ export class ProductService {
       tap((res: Order) => {
         const currentOrders = this.orderService.orders.value ?? [];
         this.orderService.orders.next([...currentOrders, res]);
+        this.orderService.refreshSalesReport();
       }),
       catchError((err) => {
         console.error('Error adding order', err);

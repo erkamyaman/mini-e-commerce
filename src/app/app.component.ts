@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     this.productService.getProducts().subscribe();
     this.ordersService.getAcceptedOrders().subscribe();
     this.ordersService.getOrders().subscribe();
+    this.ordersService.getSalesReport().subscribe();
     this.authService.setCurrentUser();
   }
 }
