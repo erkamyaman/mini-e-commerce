@@ -34,7 +34,7 @@ export class ProductCardComponent {
     if (!chosenProduct) {
       return;
     }
-    const orderPayload: OrderPayload = new OrderPayload(chosenProduct, { address: '1', quantity: 1 }, this.authService.getCurrentUserId());
+    const orderPayload: OrderPayload = new OrderPayload(chosenProduct, { address: '1', quantity: 1 }, this.authService.getCurrentUser().id);
     this.productService.addProductToSales(orderPayload).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully' });

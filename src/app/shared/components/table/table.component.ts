@@ -30,26 +30,22 @@ export class TableComponent implements OnInit {
   public orderService = inject(OrdersService)
   public messageService = inject(MessageService);
 
+
   @ViewChild('filter') filter!: ElementRef;
 
   @Input() cols: Array<{ field: string; header: string }> = [];
   @Input() data: any[] = [];
   @Input() isFromSales: boolean = false;
 
-  current: any;
   shops: any[] = []
   statusLabels: any = StatusLabels;
 
   ngOnInit(): void {
-    this.data?.forEach(element => {
-      this.userService.getUserById(element.userId).subscribe(user => {
-        element.customerName = user.name;
-      });
-    });
-
     this.shopService.getShops().subscribe((res) => {
       this.shops = res as any[];
     })
+
+    console.log(this.data)
 
     // if (this.isFromSales) {
     //   this.orderService.getAcceptedOrders().subscribe((res) => {
@@ -69,7 +65,7 @@ export class TableComponent implements OnInit {
     return field.split('.').reduce((val, key) => val?.[key], row);
   }
 
-  changeOrderStatus(id: string, status: string, user: User) {
+  changeOrderStatus(id: string, status: Status, user: User) {
     this.orderService.changeOrderStatus(id, status, user).subscribe({
       next: (res) => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: `Product status changed to ${status} successfully` });
@@ -80,23 +76,7 @@ export class TableComponent implements OnInit {
     });
   }
 
-  confirmOperation(operationType: 'accept' | 'reject' | 'delete' | 'forward', status: string, row: any) {
-    // let operationFunction: () => void;
-
-    // switch (operationType) {
-    //   case 'accept':
-    //     operationFunction = () => this.acceptOrder(row);
-    //     break;
-    //   case 'reject':
-    //     operationFunction = () => this.rejectOrder(row);
-    //     break;
-    //   case 'delete':
-    //     operationFunction = () => this.deleteOrder(row);
-    //     break;
-    //   default:
-    //     operationFunction = () => { };
-    //     break;
-    // } .  
+  confirmOperation(operationType: 'accept' | 'reject' | 'delete' | 'forward', status: Status, row: any) {
     this.confirmationService.confirm({
       message: `Are you sure you want to ${operationType} this order${operationType === "forward" ? " to the Sales" : ""}?`,
       header: `Confirm ${operationType.charAt(0).toUpperCase() + operationType.slice(1)}`,

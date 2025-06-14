@@ -5,14 +5,14 @@ export class OrderPayload {
     productId!: string;
     productName!: string;
     quantity!: number;
-    userId!: number;
+    userId!: string;
     date!: Date;
     address!: string;
     status!: Status;
     totalAmount!: number;
     shopId: number;
 
-    constructor(product: Product, form: any, userId: number) {
+    constructor(product: Product, form: any, userId: string) {
         this.productId = product.id;
         this.productName = product.name;
         this.quantity = form.quantity;

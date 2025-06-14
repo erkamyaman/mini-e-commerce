@@ -392,96 +392,16 @@
   ],
   "orders": [
     {
-      "id": "e58e",
+      "id": "1ea2",
       "productId": "L002",
       "productName": "Gandalf’s Staff",
       "quantity": 1,
       "userId": "100",
-      "date": "2025-06-05T01:45:24.852Z",
-      "address": "1",
-      "status": "Accepted",
-      "totalAmount": 199.99,
-      "shopId": "2",
-      "salesman": {
-        "id": "100",
-        "username": "god",
-        "password": "god",
-        "role": "god",
-        "name": "god",
-        "surname": "God"
-      }
-    },
-    {
-      "id": "967b",
-      "productId": "L003",
-      "productName": "Arwen’s Evenstar Pendant",
-      "quantity": 1,
-      "userId": "100",
-      "date": "2025-06-05T01:45:26.037Z",
-      "address": "1",
-      "status": "Rejected",
-      "totalAmount": 49.99,
-      "shopId": "2",
-      "salesman": {
-        "id": "100",
-        "username": "god",
-        "password": "god",
-        "role": "god",
-        "name": "god",
-        "surname": "God"
-      }
-    },
-    {
-      "id": "db1f",
-      "productId": "L005",
-      "productName": "Middle-earth Map Poster",
-      "quantity": 1,
-      "userId": "100",
-      "date": "2025-06-05T01:45:39.724Z",
-      "address": "1",
-      "status": "Rejected",
-      "totalAmount": 14.99,
-      "shopId": "2",
-      "salesman": {
-        "id": "100",
-        "username": "god",
-        "password": "god",
-        "role": "god",
-        "name": "god",
-        "surname": "God"
-      }
-    },
-    {
-      "id": "15d3",
-      "productId": "L004",
-      "productName": "Sting Sword Replica",
-      "quantity": 1,
-      "userId": "100",
-      "date": "2025-06-05T01:45:40.475Z",
+      "date": "2025-06-14T13:15:49.212Z",
       "address": "1",
       "status": "waiting",
-      "totalAmount": 89.99,
-      "shopId": 0
-    },
-    {
-      "id": "c661",
-      "productId": "L008",
-      "productName": "Gollum Plush Toy",
-      "quantity": 1,
-      "userId": "100",
-      "date": "2025-06-05T01:45:42.890Z",
-      "address": "1",
-      "status": "Deleted",
-      "totalAmount": 19.99,
-      "shopId": 0,
-      "salesman": {
-        "id": "100",
-        "username": "god",
-        "password": "god",
-        "role": "god",
-        "name": "god",
-        "surname": "God"
-      }
+      "totalAmount": 199.99,
+      "shopId": "2"
     }
   ],
   "shops": [

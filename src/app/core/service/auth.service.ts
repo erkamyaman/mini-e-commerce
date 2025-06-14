@@ -78,15 +78,11 @@ export class AuthService {
   }
 
   getCurrentUser() {
-    return this.currentUserSubject.value;
+    return this.currentUserSubject.value!;
   }
 
   getCurrentUserRole() {
     return this.currentUserSubject.value?.role;
-  }
-
-  getCurrentUserId(): number {
-    return this.currentUserSubject.value ? this.currentUserSubject.value.id ?? 0 : 0;
   }
 
   setCurrentUser() {

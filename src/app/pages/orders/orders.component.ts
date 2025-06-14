@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { TableComponent } from "../../shared/components/table/table.component";
 import { OrdersService } from './orders.service';
 import { ButtonModule } from 'primeng/button';
-import { Status } from '../../core/types/status.enum';
+import { Status, StatusLabels } from '../../core/types/status.enum';
 
 export type Order = {
   id: string;
@@ -15,6 +15,7 @@ export type Order = {
   status: Status;
   shopId: number;
   totalAmount: number;
+  userId: string;
 };
 
 @Component({
@@ -29,7 +30,7 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit() {
     this.ordersService.ordersObs$.subscribe((data) => {
-      this.orders = data as Order[];
+      this.orders = data?.filter((order) => order.status !== StatusLabels.accepted && order.status !== StatusLabels.wfa) || [];
     });
   }
 
