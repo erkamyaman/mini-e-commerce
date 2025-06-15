@@ -54,7 +54,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addProduct() {
-    const orderPayload: OrderPayload = new OrderPayload(this.chosenProduct, this.productAddForm.getRawValue(), this.authService.getCurrentUserId())
+    const orderPayload: OrderPayload = new OrderPayload(this.chosenProduct, this.productAddForm.getRawValue(), this.authService.getCurrentUser().id)
     this.productService.addProductToSales(orderPayload).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully' });
@@ -69,7 +69,7 @@ export class ProductsComponent implements OnInit {
   addProductQuick() {
     this.productAddForm.get('address')?.setValue('1')
     this.productAddForm.get('quantity')?.setValue(1)
-    const orderPayload: OrderPayload = new OrderPayload(this.chosenProduct, this.productAddForm.getRawValue(), this.authService.getCurrentUserId())
+    const orderPayload: OrderPayload = new OrderPayload(this.chosenProduct, this.productAddForm.getRawValue(), this.authService.getCurrentUser().id)
     this.productService.addProductToSales(orderPayload).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Product added successfully' });
