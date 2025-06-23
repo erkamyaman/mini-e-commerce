@@ -15,6 +15,8 @@ import { DatePipe } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
+import { Order } from '../../../pages/orders/orders.component';
+import { Shop } from '../../../core/types/shop.model';
 
 @Component({
   selector: 'app-table',
@@ -34,15 +36,15 @@ export class TableComponent implements OnInit {
   @ViewChild('filter') filter!: ElementRef;
 
   @Input() cols: Array<{ field: string; header: string }> = [];
-  @Input() data: any[] = [];
+  @Input() data: Order[] = [];
   @Input() isFromSales: boolean = false;
 
-  shops: any[] = []
-  statusLabels: any = StatusLabels;
+  shops: Shop[] = []
+  statusLabels: typeof StatusLabels = StatusLabels;
 
   ngOnInit(): void {
     this.shopService.getShops().subscribe((res) => {
-      this.shops = res as any[];
+      this.shops = res as Shop[];
     })
 
     console.log(this.data)
@@ -61,8 +63,8 @@ export class TableComponent implements OnInit {
 
   }
 
-  getFieldValue(row: any, field: string): any {
-    return field.split('.').reduce((val, key) => val?.[key], row);
+  getFieldValue(row: Order, field: string): unknown {
+    return field.split('.').reduce((val: any, key) => val?.[key], row);
   }
 
   changeOrderStatus(id: string, status: Status, user: User) {
@@ -76,7 +78,7 @@ export class TableComponent implements OnInit {
     });
   }
 
-  confirmOperation(operationType: 'accept' | 'reject' | 'delete' | 'forward', status: Status, row: any) {
+  confirmOperation(operationType: 'accept' | 'reject' | 'delete' | 'forward', status: Status, row: Order) {
     this.confirmationService.confirm({
       message: `Are you sure you want to ${operationType} this order${operationType === "forward" ? " to the Sales" : ""}?`,
       header: `Confirm ${operationType.charAt(0).toUpperCase() + operationType.slice(1)}`,
@@ -96,7 +98,7 @@ export class TableComponent implements OnInit {
     });
   }
 
-  onShopChange(row: any) {
+  onShopChange(row: Order) {
     this.orderService.addShopToOrderById(row.id, row.shopId).subscribe();
   }
 
