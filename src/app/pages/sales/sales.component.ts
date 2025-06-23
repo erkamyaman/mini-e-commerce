@@ -32,6 +32,10 @@ export class SalesComponent {
       this.report = this.handleReport(data || [])
       this.initChart()
     });
+
+
+
+
   }
 
   cols = [
