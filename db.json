@@ -392,16 +392,148 @@
   ],
   "orders": [
     {
-      "id": "1ea2",
+      "id": "558e",
+      "productId": "L001",
+      "productName": "The One Ring Replica",
+      "quantity": 1,
+      "userId": "100",
+      "date": "2025-06-23T19:57:30.266Z",
+      "address": "1",
+      "status": "Accepted",
+      "totalAmount": 129.99,
+      "shopId": "2",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "d086",
       "productId": "L002",
       "productName": "Gandalf’s Staff",
       "quantity": 1,
       "userId": "100",
-      "date": "2025-06-14T13:15:49.212Z",
+      "date": "2025-06-23T20:07:43.968Z",
+      "address": "1",
+      "status": "Waiting for Approval",
+      "totalAmount": 199.99,
+      "shopId": "2",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "025b",
+      "productId": "L002",
+      "productName": "Gandalf’s Staff",
+      "quantity": 1,
+      "userId": "100",
+      "date": "2025-06-23T20:08:51.588Z",
+      "address": "1",
+      "status": "Accepted",
+      "totalAmount": 199.99,
+      "shopId": "2",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "b63d",
+      "productId": "L001",
+      "productName": "The One Ring Replica",
+      "quantity": 1,
+      "userId": "100",
+      "date": "2025-06-23T20:13:29.922Z",
+      "address": "1",
+      "status": "Waiting for Approval",
+      "totalAmount": 129.99,
+      "shopId": "3",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "ca9b",
+      "productId": "L002",
+      "productName": "Gandalf’s Staff",
+      "quantity": 1,
+      "userId": "100",
+      "date": "2025-06-23T20:16:51.769Z",
+      "address": "1",
+      "status": "Waiting for Approval",
+      "totalAmount": 199.99,
+      "shopId": "1",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "081d",
+      "productId": "L001",
+      "productName": "The One Ring Replica",
+      "quantity": 1,
+      "userId": "100",
+      "date": "2025-06-23T20:17:03.371Z",
+      "address": "1",
+      "status": "Waiting for Approval",
+      "totalAmount": 129.99,
+      "shopId": "1",
+      "salesman": {
+        "id": "100",
+        "username": "god",
+        "password": "god",
+        "role": "god",
+        "name": "god",
+        "surname": "God"
+      }
+    },
+    {
+      "id": "3f36",
+      "productId": "L004",
+      "productName": "Sting Sword Replica",
+      "quantity": 1,
+      "userId": "100",
+      "date": "2025-06-23T20:17:04.454Z",
       "address": "1",
       "status": "waiting",
-      "totalAmount": 199.99,
-      "shopId": "2"
+      "totalAmount": 89.99,
+      "shopId": 0
+    },
+    {
+      "id": "c36e",
+      "productId": "L005",
+      "productName": "Middle-earth Map Poster",
+      "quantity": 1,
+      "userId": "100",
+      "date": "2025-06-23T20:17:05.097Z",
+      "address": "1",
+      "status": "waiting",
+      "totalAmount": 14.99,
+      "shopId": 0
     }
   ],
   "shops": [

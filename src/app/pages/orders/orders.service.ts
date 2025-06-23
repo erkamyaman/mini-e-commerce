@@ -26,13 +26,22 @@ export class OrdersService {
   ordersObs$ = this.orders.asObservable();
 
   getOrders(): Observable<Order[]> {
-    return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
-      tap((res) => {
-        this.orders.next(res);
-      }),
-      catchError((err: any) => {
-        console.error('Error loading products', err);
-        return throwError(() => new Error(err));
+    return this.userService.getUsers().pipe(
+      switchMap(() => {
+        return this.httpService.get<Order[]>('http://localhost:3000/orders').pipe(
+          tap((res) => {
+            const ordersWithCustomerNames = res.map(order => ({
+              ...order,
+              customerName: this.userService.allUsers.getValue().find((user) => user.id === order.userId)?.name || ''
+            }));
+            console.log(ordersWithCustomerNames)
+            this.orders.next(ordersWithCustomerNames);
+          }),
+          catchError((err: any) => {
+            console.error('Error loading products', err);
+            return throwError(() => new Error(err));
+          })
+        );
       })
     );
   }
@@ -68,8 +77,11 @@ export class OrdersService {
       .patch<Order>(`http://localhost:3000/orders/${id}`, { status, salesman: user })
       .pipe(
         tap(() => {
+          console.log(user)
           let allOrders = this.orders.getValue()!
-          allOrders = allOrders.map(o => o.id === id ? { ...o, status: status } : o)
+          console.log(allOrders)
+          allOrders = allOrders.map(o => o.id === id ? { ...o, status: status, salesman: user } : o)
+          console.log(allOrders)
           this.orders.next(allOrders);
         }),
         catchError((err: any) => {
